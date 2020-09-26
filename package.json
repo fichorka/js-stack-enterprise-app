@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
-    "start-server": "ts-node --project ./src/backend/tsconfig.json ./src/backend/index.ts --esModuleInterop"
+    "start-server": "ts-node --project ./src/backend/tsconfig.json ./src/backend/index.ts"
   },
   "repository": {
     "type": "git",
