@@ -1,11 +1,11 @@
 # App specification
 
-**Requirements**
+**Requirements:**
 
-- Databases: Login, Deprtment and Employee
-- Department and Employee lists
-- Special Queries
+- Databases: Login, Department and Employee
+- Lists for departments and employees
 - User authorization for accessing tables (collections)
+- Special Queries
 - Feature: export table to text
 
 ## Entities:
