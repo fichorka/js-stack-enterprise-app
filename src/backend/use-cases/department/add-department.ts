@@ -19,4 +19,6 @@ interface MakeProps {
   departmentsDb: DepartmentsDb
 }
 
-type AddDepartment = (departmentInfo: Department) => Promise<Department | null>
+export type AddDepartment = (
+  departmentInfo: Department
+) => Promise<Department | null>
