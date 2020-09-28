@@ -44,7 +44,7 @@ type MakeDepartment = ({
   departmentInfo: Department
 }) => Department
 
-interface Department {
+export interface Department {
   _id?: ObjectId
   departmentName?: string
   departmentLocation?: string
