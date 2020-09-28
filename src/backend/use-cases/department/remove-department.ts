@@ -1,15 +1,17 @@
 import { ObjectId } from 'mongodb'
 import { Department } from '../../entities'
 
-const makeRemoveDepartment: MakeRemoveDepartment = function ({ departmentDb }) {
+const makeRemoveDepartment: MakeRemoveDepartment = function ({
+  departmentsDb
+}) {
   const removeDepartment: RemoveDepartment = async function (departmentId) {
-    const exists = await departmentDb.findOne(departmentId)
+    const exists = await departmentsDb.findOne(departmentId)
 
     if (!exists) {
       throw new Error('No Department with such Id.')
     }
 
-    await departmentDb.deleteOne(departmentId)
+    await departmentsDb.deleteOne(departmentId)
 
     return exists
   }
@@ -19,10 +21,10 @@ const makeRemoveDepartment: MakeRemoveDepartment = function ({ departmentDb }) {
 
 export { makeRemoveDepartment }
 
-type MakeRemoveDepartment = ({ departmentDb }: MakeProps) => RemoveDepartment
+type MakeRemoveDepartment = ({ departmentsDb }: MakeProps) => RemoveDepartment
 
 interface MakeProps {
-  departmentDb: any
+  departmentsDb: any
 }
 
 type RemoveDepartment = (departmentId: ObjectId) => Promise<Department>

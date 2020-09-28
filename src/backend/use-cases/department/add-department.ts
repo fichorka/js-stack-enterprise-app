@@ -1,11 +1,11 @@
 import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department, makeDepartment } from '../../entities'
 
-const makeAddDepartment: MakeAddDepartment = function ({ departmentDb }) {
+const makeAddDepartment: MakeAddDepartment = function ({ departmentsDb }) {
   const addDepartment: AddDepartment = async function (departmentInfo) {
     const department = makeDepartment({ departmentInfo })
 
-    return await departmentDb.insertOne(department)
+    return await departmentsDb.insertOne(department)
   }
 
   return addDepartment
@@ -13,10 +13,10 @@ const makeAddDepartment: MakeAddDepartment = function ({ departmentDb }) {
 
 export { makeAddDepartment }
 
-type MakeAddDepartment = ({ departmentDb }: MakeProps) => AddDepartment
+type MakeAddDepartment = ({ departmentsDb }: MakeProps) => AddDepartment
 
 interface MakeProps {
-  departmentDb: DepartmentsDb
+  departmentsDb: DepartmentsDb
 }
 
 type AddDepartment = (departmentInfo: Department) => Promise<Department | null>

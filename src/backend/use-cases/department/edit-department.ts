@@ -1,13 +1,13 @@
 import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department, makeDepartment } from '../../entities'
 
-const makeEditDepartment: MakeEditDepartment = function ({ departmentDb }) {
+const makeEditDepartment: MakeEditDepartment = function ({ departmentsDb }) {
   const editDepartment: EditDepartment = async function ({ departmentInfo }) {
     if (!departmentInfo._id) {
       throw new Error('No Id.')
     }
 
-    const existing = await departmentDb.findOne(departmentInfo._id)
+    const existing = await departmentsDb.findOne(departmentInfo._id)
 
     if (!existing) {
       throw new Error('No Department with such Id.')
@@ -21,7 +21,7 @@ const makeEditDepartment: MakeEditDepartment = function ({ departmentDb }) {
       }
     })
 
-    await departmentDb.updateOne(modifiedDepartment)
+    await departmentsDb.updateOne(modifiedDepartment)
 
     return modifiedDepartment
   }
@@ -31,10 +31,10 @@ const makeEditDepartment: MakeEditDepartment = function ({ departmentDb }) {
 
 export { makeEditDepartment }
 
-type MakeEditDepartment = ({ departmentDb }: MakeProps) => EditDepartment
+type MakeEditDepartment = ({ departmentsDb }: MakeProps) => EditDepartment
 
 interface MakeProps {
-  departmentDb: DepartmentsDb
+  departmentsDb: DepartmentsDb
 }
 
 type EditDepartment = ({

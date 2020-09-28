@@ -2,14 +2,14 @@ import { ObjectId } from 'mongodb'
 import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department } from '../../entities'
 
-const makeListDepartment: MakeListDepartment = function ({ departmentDb }) {
+const makeListDepartment: MakeListDepartment = function ({ departmentsDb }) {
   const listDepartment: ListDepartment = async function ({
     departmentId,
     limit = 10,
     skip = 0
   }) {
     if (departmentId) {
-      const requestedDepartment = await departmentDb.findOne(departmentId)
+      const requestedDepartment = await departmentsDb.findOne(departmentId)
       if (!requestedDepartment) {
         throw new Error('No department with such such Id.')
       }
@@ -17,7 +17,7 @@ const makeListDepartment: MakeListDepartment = function ({ departmentDb }) {
       return requestedDepartment
     }
 
-    return await departmentDb.findAll({ limit, skip })
+    return await departmentsDb.findAll({ limit, skip })
   }
 
   return listDepartment
@@ -25,13 +25,13 @@ const makeListDepartment: MakeListDepartment = function ({ departmentDb }) {
 
 export { makeListDepartment }
 
-type MakeListDepartment = ({ departmentDb }: MakeProps) => ListDepartment
+type MakeListDepartment = ({ departmentsDb }: MakeProps) => ListDepartment
 
 interface MakeProps {
-  departmentDb: DepartmentsDb
+  departmentsDb: DepartmentsDb
 }
 
-type ListDepartment = (
+export type ListDepartment = (
   queryOptions: ListProps
 ) => Promise<Department | Department[] | []>
 
