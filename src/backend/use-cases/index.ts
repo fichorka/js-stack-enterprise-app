@@ -1,4 +1,4 @@
-import { departmentsDb, employeesDb } from '../data-access'
+import { departmentsDb, employeesDb, loginsDb } from '../data-access'
 import {
   makeAddDepartment,
   makeEditDepartment,
@@ -11,6 +11,7 @@ import {
   makeEditEmployee,
   makeRemoveEmployee
 } from './employee'
+import { makeFindLogin } from './login'
 
 const listDepartments = makeListDepartment({ departmentsDb })
 const addDepartment = makeAddDepartment({ departmentsDb })
@@ -22,6 +23,8 @@ const addEmployee = makeAddEmployee({ employeesDb })
 const editEmployee = makeEditEmployee({ employeesDb })
 const removeEmployee = makeRemoveEmployee({ employeesDb })
 
+const findLogin = makeFindLogin({ loginsDb })
+
 export {
   listDepartments,
   addDepartment,
@@ -30,5 +33,6 @@ export {
   listEmployees,
   addEmployee,
   editEmployee,
-  removeEmployee
+  removeEmployee,
+  findLogin
 }
