@@ -17,6 +17,6 @@ const departmentsDb = makeDepartmentsDb({ makeDb })
 const employeesDb = makeEmployeesDb({ makeDb })
 const loginsDb = makeLoginsDb({ makeDb })
 
-export { departmentsDb, employeesDb, loginsDb }
+export { departmentsDb, employeesDb, loginsDb, makeDb }
 
 export type MakeDb = () => Promise<Db>
