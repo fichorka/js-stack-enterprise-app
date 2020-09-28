@@ -3,7 +3,7 @@ import { LoginsDb } from '../../data-access/logins-db'
 import { Login } from '../../entities/login'
 
 const makeFindLogin: MakeFindLogin = function ({ loginsDb }) {
-  const findLogin: FindLogin = async function (loginId?: ObjectId) {
+  const findLogin: FindLogin = async function (loginId) {
     if (!loginId) {
       throw new Error('No Id.')
     }
@@ -28,4 +28,4 @@ interface MakeProps {
   loginsDb: LoginsDb
 }
 
-export type FindLogin = (queryOptions: ListProps) => Promise<Login>
+export type FindLogin = (loginId: ObjectId) => Promise<Login>
