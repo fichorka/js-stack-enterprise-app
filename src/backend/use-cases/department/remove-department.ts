@@ -27,4 +27,4 @@ interface MakeProps {
   departmentsDb: any
 }
 
-type RemoveDepartment = (departmentId: ObjectId) => Promise<Department>
+export type RemoveDepartment = (departmentId: ObjectId) => Promise<Department>
