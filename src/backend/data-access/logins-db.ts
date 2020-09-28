@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
+import { MakeDb } from '.'
 import { Login } from '../entities/login'
-import { MakeDb } from './type'
 
 const makeLoginsDb: MakeLoginsDb = function ({ makeDb }) {
   const findOne: FindOne = async function (id) {
