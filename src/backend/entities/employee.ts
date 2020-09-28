@@ -44,7 +44,7 @@ export { makeEmployee }
 
 type MakeEmployee = ({ employeeInfo }: { employeeInfo: Employee }) => Employee
 
-interface Employee {
+export interface Employee {
   _id?: ObjectId
   employeeName?: string
   salary?: number
