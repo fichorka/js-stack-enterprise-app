@@ -38,11 +38,21 @@ const makeEmployeesDb: MakeEmployeesDb = function ({ makeDb }) {
     return insertOperation?.result?.ok ? employee : null
   }
 
+  const deleteOne: DeleteOne = async function (id) {
+    const db = await makeDb()
+    const deleteOperation = await db
+      .collection('employees')
+      .deleteOne({ _id: id })
+
+    return deleteOperation?.result?.ok ? id : null
+  }
+
   return {
     findOne,
     findAll,
     insertOne,
-    updateOne
+    updateOne,
+    deleteOne
   }
 }
 
@@ -54,6 +64,7 @@ export interface EmployeesDb {
   findAll: FindAll
   insertOne: InsertOne
   updateOne: UpdateOne
+  deleteOne: DeleteOne
 }
 
 type FindOne = (id: ObjectId) => Promise<Employee | null>
@@ -69,3 +80,5 @@ type FindAll = ({
 type InsertOne = (employee: Employee) => Promise<Employee | null>
 
 type UpdateOne = (employee: Employee) => Promise<Employee | null>
+
+type DeleteOne = (id: ObjectId) => Promise<ObjectId | null>

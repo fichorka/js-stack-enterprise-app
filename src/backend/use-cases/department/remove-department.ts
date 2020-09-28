@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb'
+import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department } from '../../entities'
 
 const makeRemoveDepartment: MakeRemoveDepartment = function ({
@@ -24,7 +25,7 @@ export { makeRemoveDepartment }
 type MakeRemoveDepartment = ({ departmentsDb }: MakeProps) => RemoveDepartment
 
 interface MakeProps {
-  departmentsDb: any
+  departmentsDb: DepartmentsDb
 }
 
 export type RemoveDepartment = (departmentId: ObjectId) => Promise<Department>

@@ -1,4 +1,5 @@
-import { Department, makeEmployee, Employee } from '../../entities'
+import { EmployeesDb } from '../../data-access/employees-db'
+import { makeEmployee, Employee } from '../../entities'
 
 const makeAddEmployee: MakeAddEmployees = function ({ employeesDb }) {
   const addEmployee: AddEmployees = async function (employeeInfo) {
@@ -15,7 +16,7 @@ export { makeAddEmployee }
 type MakeAddEmployees = ({ employeesDb }: MakeProps) => AddEmployees
 
 interface MakeProps {
-  employeesDb: any
+  employeesDb: EmployeesDb
 }
 
-export type AddEmployees = (employeeInfo: Employee) => Promise<Department>
+export type AddEmployees = (employeeInfo: Employee) => Promise<Employee | null>

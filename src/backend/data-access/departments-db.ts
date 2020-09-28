@@ -40,11 +40,21 @@ const makeDepartmentsDb: MakeDepartmentsDb = function ({ makeDb }) {
     return insertOperation?.result?.ok ? department : null
   }
 
+  const deleteOne: DeleteOne = async function (id) {
+    const db = await makeDb()
+    const deleteOperation = await db
+      .collection('departments')
+      .deleteOne({ _id: id })
+
+    return deleteOperation?.result?.ok ? id : null
+  }
+
   return {
     findOne,
     findAll,
     insertOne,
-    updateOne
+    updateOne,
+    deleteOne
   }
 }
 
@@ -57,6 +67,7 @@ export interface DepartmentsDb {
   findAll: FindAll
   insertOne: InsertOne
   updateOne: UpdateOne
+  deleteOne: DeleteOne
 }
 
 type FindOne = (id: ObjectId) => Promise<Department | null>
@@ -72,3 +83,5 @@ type FindAll = ({
 type InsertOne = (department: Department) => Promise<Department | null>
 
 type UpdateOne = (department: Department) => Promise<Department | null>
+
+type DeleteOne = (id: ObjectId) => Promise<ObjectId | null>
