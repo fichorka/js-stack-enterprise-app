@@ -1,13 +1,13 @@
 import { EmployeesDb } from '../../data-access/employees-db'
 import { Employee, makeEmployee } from '../../entities'
 
-const makeEditEmployee: MakeEditEmployee = function ({ employeeDb }) {
+const makeEditEmployee: MakeEditEmployee = function ({ employeesDb }) {
   const editEmployee: EditEmployee = async function (employeeInfo) {
     if (!employeeInfo._id) {
       throw new Error('No Id.')
     }
 
-    const existing = await employeeDb.findOne(employeeInfo._id)
+    const existing = await employeesDb.findOne(employeeInfo._id)
 
     if (!existing) {
       throw new Error('No employee with such Id.')
@@ -21,7 +21,7 @@ const makeEditEmployee: MakeEditEmployee = function ({ employeeDb }) {
       }
     })
 
-    await employeeDb.updateOne(modifiedEmployee)
+    await employeesDb.updateOne(modifiedEmployee)
 
     return modifiedEmployee
   }
@@ -31,10 +31,10 @@ const makeEditEmployee: MakeEditEmployee = function ({ employeeDb }) {
 
 export { makeEditEmployee }
 
-type MakeEditEmployee = ({ employeeDb }: MakeProps) => EditEmployee
+type MakeEditEmployee = ({ employeesDb }: MakeProps) => EditEmployee
 
 interface MakeProps {
-  employeeDb: EmployeesDb
+  employeesDb: EmployeesDb
 }
 
 export type EditEmployee = (employeeInfo: Employee) => Promise<Employee>

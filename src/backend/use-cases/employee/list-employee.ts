@@ -2,14 +2,14 @@ import { ObjectId } from 'mongodb'
 import { EmployeesDb } from '../../data-access/employees-db'
 import { Employee } from '../../entities'
 
-const makeListEmployee: MakeListEmployee = function ({ employeeDb }) {
+const makeListEmployee: MakeListEmployee = function ({ employeesDb }) {
   const listEmployee: ListEmployee = async function ({
     employeeId,
     limit = 10,
     skip = 0
   }) {
     if (employeeId) {
-      const requestedEmployee = await employeeDb.findOne(employeeId)
+      const requestedEmployee = await employeesDb.findOne(employeeId)
       if (!requestedEmployee) {
         throw new Error('No employee with such such Id.')
       }
@@ -17,7 +17,7 @@ const makeListEmployee: MakeListEmployee = function ({ employeeDb }) {
       return requestedEmployee
     }
 
-    return await employeeDb.findAll({ limit, skip })
+    return await employeesDb.findAll({ limit, skip })
   }
 
   return listEmployee
@@ -25,10 +25,10 @@ const makeListEmployee: MakeListEmployee = function ({ employeeDb }) {
 
 export { makeListEmployee }
 
-type MakeListEmployee = ({ employeeDb }: MakeProps) => ListEmployee
+type MakeListEmployee = ({ employeesDb }: MakeProps) => ListEmployee
 
 interface MakeProps {
-  employeeDb: EmployeesDb
+  employeesDb: EmployeesDb
 }
 
 export type ListEmployee = (
