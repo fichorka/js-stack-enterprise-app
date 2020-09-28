@@ -1,18 +1,24 @@
-import { ObjectId } from 'mongodb'
+import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department, makeDepartment } from '../../entities'
 
 const makeEditDepartment: MakeEditDepartment = function ({ departmentDb }) {
-  const editDepartment: EditDepartment = async function (departmentInfo) {
-    const existing = await departmentDb.findOne(departmentInfo)
+  const editDepartment: EditDepartment = async function ({ departmentInfo }) {
+    if (!departmentInfo._id) {
+      throw new Error('No Id.')
+    }
+
+    const existing = await departmentDb.findOne(departmentInfo._id)
 
     if (!existing) {
       throw new Error('No Department with such Id.')
     }
 
     const modifiedDepartment = await makeDepartment({
-      ...existing,
-      ...departmentInfo,
-      id: existing.id
+      departmentInfo: {
+        ...existing,
+        ...departmentInfo,
+        _id: existing._id
+      }
     })
 
     await departmentDb.updateOne(modifiedDepartment)
@@ -28,7 +34,11 @@ export { makeEditDepartment }
 type MakeEditDepartment = ({ departmentDb }: MakeProps) => EditDepartment
 
 interface MakeProps {
-  departmentDb: any
+  departmentDb: DepartmentsDb
 }
 
-type EditDepartment = (departmentId: ObjectId) => Promise<Department>
+type EditDepartment = ({
+  departmentInfo
+}: {
+  departmentInfo: Department
+}) => Promise<Department>

@@ -48,11 +48,8 @@ const makeEmployeesDb: MakeEmployeesDb = function ({ makeDb }) {
 
 export { makeEmployeesDb }
 
-type MakeEmployeesDb = ({
-  makeDb
-}: {
-  makeDb: MakeDb
-}) => {
+type MakeEmployeesDb = ({ makeDb }: { makeDb: MakeDb }) => EmployeesDb
+export interface EmployeesDb {
   findOne: FindOne
   findAll: FindAll
   insertOne: InsertOne

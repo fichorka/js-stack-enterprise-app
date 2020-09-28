@@ -1,3 +1,4 @@
+import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department, makeDepartment } from '../../entities'
 
 const makeAddDepartment: MakeAddDepartment = function ({ departmentDb }) {
@@ -15,7 +16,7 @@ export { makeAddDepartment }
 type MakeAddDepartment = ({ departmentDb }: MakeProps) => AddDepartment
 
 interface MakeProps {
-  departmentDb: any
+  departmentDb: DepartmentsDb
 }
 
-type AddDepartment = (departmentInfo: Department) => Promise<Department>
+type AddDepartment = (departmentInfo: Department) => Promise<Department | null>

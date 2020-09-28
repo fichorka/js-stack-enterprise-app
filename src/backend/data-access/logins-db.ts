@@ -17,11 +17,9 @@ const makeLoginsDb: MakeLoginsDb = function ({ makeDb }) {
 
 export { makeLoginsDb }
 
-type MakeLoginsDb = ({
-  makeDb
-}: {
-  makeDb: MakeDb
-}) => {
+type MakeLoginsDb = ({ makeDb }: { makeDb: MakeDb }) => LoginsDb
+
+export interface LoginsDb {
   findOne: FindOne
 }
 

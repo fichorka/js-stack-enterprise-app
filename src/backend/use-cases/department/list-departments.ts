@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb'
+import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department } from '../../entities'
 
 const makeListDepartment: MakeListDepartment = function ({ departmentDb }) {
@@ -27,10 +28,12 @@ export { makeListDepartment }
 type MakeListDepartment = ({ departmentDb }: MakeProps) => ListDepartment
 
 interface MakeProps {
-  departmentDb: any
+  departmentDb: DepartmentsDb
 }
 
-type ListDepartment = (queryOptions: ListProps) => Promise<Department>
+type ListDepartment = (
+  queryOptions: ListProps
+) => Promise<Department | Department[] | []>
 
 interface ListProps {
   departmentId?: ObjectId
