@@ -1,4 +1,8 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from 'express'
+
+console.log(process.env.MONGO_URI)
 
 const app = express()
 
