@@ -37,7 +37,7 @@ interface MakeProps {
   departmentsDb: DepartmentsDb
 }
 
-type EditDepartment = ({
+export type EditDepartment = ({
   departmentInfo
 }: {
   departmentInfo: Department
