@@ -25,4 +25,4 @@ interface MakeProps {
   employeeDb: any
 }
 
-type RemoveEmployee = (employeeId: ObjectId) => Promise<Employee>
+export type RemoveEmployee = (employeeId: ObjectId) => Promise<Employee>

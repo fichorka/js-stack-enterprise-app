@@ -18,4 +18,4 @@ interface MakeProps {
   employeesDb: any
 }
 
-type AddEmployees = (employeeInfo: Employee) => Promise<Department>
+export type AddEmployees = (employeeInfo: Employee) => Promise<Department>

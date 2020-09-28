@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb'
+import { EmployeesDb } from '../../data-access/employees-db'
 import { Employee } from '../../entities'
 
 const makeListEmployee: MakeListEmployee = function ({ employeeDb }) {
@@ -27,10 +28,12 @@ export { makeListEmployee }
 type MakeListEmployee = ({ employeeDb }: MakeProps) => ListEmployee
 
 interface MakeProps {
-  employeeDb: any
+  employeeDb: EmployeesDb
 }
 
-type ListEmployee = (queryOptions: ListProps) => Promise<Employee>
+export type ListEmployee = (
+  queryOptions: ListProps
+) => Promise<Employee | Employee[]>
 
 interface ListProps {
   employeeId?: ObjectId
