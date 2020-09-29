@@ -3,7 +3,7 @@ import {
   initialDepartments,
   initialEmployees,
   initialLogins
-} from './initialTCollections'
+} from './initialCollections'
 
 const initializeDb: InitializeDb = async function () {
   // initializes collections (tables) with a template if not initialized already
