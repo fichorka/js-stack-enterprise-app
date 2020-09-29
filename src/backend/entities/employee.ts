@@ -27,11 +27,11 @@ const makeEmployee: MakeEmployee = function ({ employeeInfo }) {
 
   employee.salary = employeeInfo.salary
 
-  if (!employeeInfo.departmendId) {
+  if (!employeeInfo.departmentId) {
     throw new Error('departmendId is undefined.')
   }
 
-  employee.departmendId = employeeInfo.departmendId
+  employee.departmentId = employeeInfo.departmentId
 
   employee.lastModifyDate = new Date()
 
@@ -48,6 +48,6 @@ export interface Employee {
   _id?: ObjectId
   employeeName?: string
   salary?: number
-  departmendId?: ObjectId
+  departmentId?: ObjectId
   lastModifyDate?: Date
 }
