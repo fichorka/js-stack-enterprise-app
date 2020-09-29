@@ -22,6 +22,7 @@ import {
   makePostEmployee
 } from './employees'
 import { makePostLogin } from './login'
+import { makePostLogout } from './logout'
 
 const getDepartments = makeGetDepartments({ listDepartments })
 const postDepartment = makePostDepartment({ addDepartment })
@@ -35,6 +36,8 @@ const deleteEmployee = makeDeleteEmployee({ removeEmployee })
 
 const postLogin = makePostLogin({ findLogin })
 
+const postLogout = makePostLogout()
+
 export {
   getDepartments,
   postDepartment,
@@ -44,5 +47,6 @@ export {
   postEmployee,
   patchEmployee,
   deleteEmployee,
-  postLogin
+  postLogin,
+  postLogout
 }

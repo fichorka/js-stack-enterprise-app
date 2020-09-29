@@ -9,6 +9,7 @@ import { employeesRouter } from './routes/employeesRouter'
 import { loginRouter } from './routes/loginRouter'
 
 // app
+import { logoutRouter } from './routes/logoutRouter'
 ;(async () => {
   await initializeDb()
 
@@ -22,6 +23,7 @@ import { loginRouter } from './routes/loginRouter'
 
   //routes
   app.use('/login', loginRouter)
+  app.use('/logout', logoutRouter)
   app.use('/departments', departmentsRouter)
   app.use('/employees', employeesRouter)
 
