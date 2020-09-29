@@ -7,6 +7,7 @@ const makeGetEmployees: MakeGetEmployees = function ({ listEmployees }) {
       const employeeList = await listEmployees(httpRequest.params)
 
       return {
+        statusCode: 200,
         body: {
           meta: {
             status: 'success'
@@ -18,6 +19,7 @@ const makeGetEmployees: MakeGetEmployees = function ({ listEmployees }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',

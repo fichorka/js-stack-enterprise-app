@@ -13,6 +13,7 @@ const makeDeleteEmployee: MakeDeleteEmployee = function ({ removeEmployee }) {
       const removedEmployee = await removeEmployee(id)
 
       return {
+        statusCode: 200,
         body: {
           meta: {
             status: 'success'
@@ -24,6 +25,7 @@ const makeDeleteEmployee: MakeDeleteEmployee = function ({ removeEmployee }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',

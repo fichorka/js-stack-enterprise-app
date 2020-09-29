@@ -7,6 +7,7 @@ const makePatchEmployee: MakePatchEmployee = function ({ editEmployee }) {
       const editedEmployee = await editEmployee(httpRequest.body)
 
       return {
+        statusCode: 200,
         body: {
           meta: {
             status: 'success'
@@ -18,6 +19,7 @@ const makePatchEmployee: MakePatchEmployee = function ({ editEmployee }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',

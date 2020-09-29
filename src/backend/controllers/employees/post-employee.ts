@@ -7,6 +7,7 @@ const makePostEmployee: MakePostEmployee = function ({ addEmployee }) {
       const newEmployee = await addEmployee(httpRequest.body)
 
       return {
+        statusCode: 201,
         body: {
           meta: {
             status: 'success'
@@ -18,6 +19,7 @@ const makePostEmployee: MakePostEmployee = function ({ addEmployee }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',
