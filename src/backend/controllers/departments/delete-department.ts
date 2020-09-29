@@ -15,6 +15,7 @@ const makeDeleteDepartment: MakeDeleteDepartment = function ({
       const removedDepartment = await removeDepartment(id)
 
       return {
+        statusCode: 204,
         body: {
           meta: {
             status: 'success'
@@ -26,6 +27,7 @@ const makeDeleteDepartment: MakeDeleteDepartment = function ({
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',

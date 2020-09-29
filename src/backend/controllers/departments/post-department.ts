@@ -7,6 +7,7 @@ const makePostDepartment: MakePostDepartment = function ({ addDepartment }) {
       const newDepartment = await addDepartment(httpRequest.body)
 
       return {
+        statusCode: 201,
         body: {
           meta: {
             status: 'success'
@@ -18,6 +19,7 @@ const makePostDepartment: MakePostDepartment = function ({ addDepartment }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',

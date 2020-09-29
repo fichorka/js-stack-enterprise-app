@@ -7,6 +7,7 @@ const makePatchDepartment: MakePatchDepartment = function ({ editDepartment }) {
       const editedDepartment = await editDepartment(httpRequest.body)
 
       return {
+        statusCode: 200,
         body: {
           meta: {
             status: 'success'
@@ -18,6 +19,7 @@ const makePatchDepartment: MakePatchDepartment = function ({ editDepartment }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',

@@ -7,6 +7,7 @@ const makeGetDepartments: MakeGetDepartments = function ({ listDepartments }) {
       const departmentList = await listDepartments(httpRequest.params)
 
       return {
+        statusCode: 200,
         body: {
           meta: {
             status: 'success'
@@ -18,6 +19,7 @@ const makeGetDepartments: MakeGetDepartments = function ({ listDepartments }) {
       console.log(error)
 
       return {
+        statusCode: 400,
         body: {
           meta: {
             status: 'fail',
