@@ -3,19 +3,28 @@ dotenv.config()
 import express from 'express'
 import session from 'express-session'
 import { SESSSION_OPTIONS } from './config'
+import { initializeDb } from './database'
+import { departmentsRouter } from './routes/departmentsRouter'
+import { employeesRouter } from './routes/employeesRouter'
+import { loginRouter } from './routes/loginRouter'
 
-const app = express()
+// app
+;(async () => {
+  await initializeDb()
 
-app.use(session(SESSSION_OPTIONS))
+  console.log('Starting server...')
 
-//middleware
-app.use(session(SESSSION_OPTIONS))
+  const app = express()
 
-app.get('/', (req, res) => {
-  res.type('json')
-  res.send({ message: 'Hi!' })
-})
+  // middleware
+  app.use(session(SESSSION_OPTIONS))
 
-app.listen(3000, () => {
-  console.log('Server is listening on http://localhost:3000')
-})
+  //routes
+  app.use('/login', loginRouter)
+  app.use('/departments', departmentsRouter)
+  app.use('/employees', employeesRouter)
+
+  app.listen(3000, () => {
+    console.log('Server is listening on http://localhost:3000')
+  })
+})()
