@@ -7,7 +7,7 @@ const makeExpressCallback: MakeExpressCallback = function (controller) {
       body: req.body,
       params: req.query
     }
-    const httpResponse = await controller(httpRequest)
+    const httpResponse = await controller(httpRequest, req.session)
     res.type('json')
     res.status(httpResponse.statusCode).send(httpResponse.body)
   }
@@ -16,4 +16,7 @@ const makeExpressCallback: MakeExpressCallback = function (controller) {
 export { makeExpressCallback }
 
 type MakeExpressCallback = (controller: Controller) => Handler
-type Controller = (httpResponse: HttpRequest) => Promise<HttpResponse>
+type Controller = (
+  httpResponse: HttpRequest,
+  session?: any
+) => Promise<HttpResponse>
