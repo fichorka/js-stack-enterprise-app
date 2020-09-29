@@ -9,10 +9,6 @@ const makeFindLogin: MakeFindLogin = function ({ loginsDb }) {
 
     const requestedLogin = await loginsDb.findOne(loginUserName)
 
-    if (!requestedLogin) {
-      throw new Error('No login with such such Id.')
-    }
-
     return requestedLogin
   }
 
@@ -27,4 +23,4 @@ interface MakeProps {
   loginsDb: LoginsDb
 }
 
-export type FindLogin = (loginUserName: string) => Promise<Login>
+export type FindLogin = (loginUserName: string) => Promise<Login | null>

@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb'
 import { MakeDb } from '.'
 import { Login } from '../entities/login'
 
@@ -6,7 +5,7 @@ const makeLoginsDb: MakeLoginsDb = function ({ makeDb }) {
   const findOne: FindOne = async function (username) {
     const db = await makeDb()
     const login = await db
-      .collection('login')
+      .collection('logins')
       .findOne({ loginUserName: username })
 
     return login || null

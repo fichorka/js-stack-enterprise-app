@@ -5,15 +5,15 @@ const makePostLogin: MakePostLogin = function ({ findLogin }) {
   const postLogin: PostLogin = async function (httpRequest, session) {
     // authenticates user on login by creating a session
     try {
-      const loginRequestInfo = httpRequest.body
+      const { username, password } = httpRequest.body
 
-      const existingLogin = await findLogin(loginRequestInfo.username)
+      const existingLogin = await findLogin(username)
 
       if (!existingLogin) {
         throw new Error('No user with such username.')
       }
 
-      if (loginRequestInfo.password !== existingLogin.loginPassword) {
+      if (password !== existingLogin.loginPassword) {
         throw new Error('Invalid password.')
       }
 
