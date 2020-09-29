@@ -19,35 +19,74 @@ const initializeDb: InitializeDb = async function () {
       .then(data => data.map(collection => collection.name))
 
     if (!allCollections.includes('logins')) {
-      console.log("initializing 'logins' collection.")
+      console.log("initializing 'logins' collection...")
       const logins = await db.createCollection('logins')
-      logins.insertMany(initialLogins)
+      await logins.insertMany(initialLogins)
     } else {
       console.log("'logins' collection already initialized.")
     }
 
-    if (!allCollections.includes('departments')) {
-      console.log("initializing 'departments' collection")
-      const departments = await db.createCollection('departments')
-      departments.insertMany(initialDepartments)
-    } else {
-      console.log("'departments' collection already initialized.")
-    }
+    if (
+      !allCollections.includes('departments') ||
+      !allCollections.includes('employees')
+    ) {
+      // collections 'departments' and 'employees' must be initialized together so that employee.departmentId gets the right foreign key from departments
 
-    if (!allCollections.includes('employees')) {
-      console.log("initializing 'employees' collection.")
+      console.log("initializing 'departments' collection...")
+      const departments = await db.createCollection('departments')
+      const { ops } = await departments.insertMany(initialDepartments)
+      const employeesToInsert = []
+      employeesToInsert[0] = {
+        ...initialEmployees[0],
+        departmentId: ops[3]._id
+      }
+      employeesToInsert[1] = {
+        ...initialEmployees[1],
+        departmentId: ops[2]._id
+      }
+      employeesToInsert[2] = {
+        ...initialEmployees[2],
+        departmentId: ops[4]._id
+      }
+      employeesToInsert[3] = {
+        ...initialEmployees[3],
+        departmentId: ops[5]._id
+      }
+      employeesToInsert[4] = {
+        ...initialEmployees[4],
+        departmentId: ops[7]._id
+      }
+      employeesToInsert[5] = {
+        ...initialEmployees[5],
+        departmentId: ops[6]._id
+      }
+      employeesToInsert[6] = {
+        ...initialEmployees[6],
+        departmentId: ops[2]._id
+      }
+      employeesToInsert[7] = {
+        ...initialEmployees[7],
+        departmentId: ops[2]._id
+      }
+      employeesToInsert[8] = {
+        ...initialEmployees[8],
+        departmentId: ops[2]._id
+      }
+
+      console.log("initializing 'employees' collection...")
       const employees = await db.createCollection('employees')
-      employees.insertMany(initialEmployees)
+      await employees.insertMany(employeesToInsert)
     } else {
-      console.log("'employees' collection already initialized.")
+      console.log(
+        "'employees' and 'departments' collection already initialized."
+      )
     }
 
     console.log('Database successfully initialized.')
 
     return
   } catch (error) {
-    console.log('Database initialization failed.')
-    console.log(error)
+    console.log('Database initialization failed:', error.message)
   }
 }
 
