@@ -4,9 +4,9 @@ import express from 'express'
 import session from 'express-session'
 import { SESSSION_OPTIONS } from './config'
 
-console.log(process.env.MONGO_URI)
-
 const app = express()
+
+app.use(session(SESSSION_OPTIONS))
 
 //middleware
 app.use(session(SESSSION_OPTIONS))

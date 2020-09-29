@@ -3,6 +3,7 @@ import {
   addEmployee,
   editDepartment,
   editEmployee,
+  findLogin,
   listDepartments,
   listEmployees,
   removeDepartment,
@@ -20,6 +21,7 @@ import {
   makePatchEmployee,
   makePostEmployee
 } from './employees'
+import { makePostLogin } from './login'
 
 const getDepartments = makeGetDepartments({ listDepartments })
 const postDepartment = makePostDepartment({ addDepartment })
@@ -31,6 +33,8 @@ const postEmployee = makePostEmployee({ addEmployee })
 const patchEmployee = makePatchEmployee({ editEmployee })
 const deleteEmployee = makeDeleteEmployee({ removeEmployee })
 
+const postLogin = makePostLogin({ findLogin })
+
 export {
   getDepartments,
   postDepartment,
@@ -39,5 +43,6 @@ export {
   getEmployees,
   postEmployee,
   patchEmployee,
-  deleteEmployee
+  deleteEmployee,
+  postLogin
 }

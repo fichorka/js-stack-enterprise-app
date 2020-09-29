@@ -3,9 +3,11 @@ import { MakeDb } from '.'
 import { Login } from '../entities/login'
 
 const makeLoginsDb: MakeLoginsDb = function ({ makeDb }) {
-  const findOne: FindOne = async function (id) {
+  const findOne: FindOne = async function (username) {
     const db = await makeDb()
-    const login = await db.collection('login').findOne({ _id: id })
+    const login = await db
+      .collection('login')
+      .findOne({ loginUserName: username })
 
     return login || null
   }
@@ -23,4 +25,4 @@ export interface LoginsDb {
   findOne: FindOne
 }
 
-type FindOne = (id: ObjectId) => Promise<Login | null>
+type FindOne = (username: string) => Promise<Login | null>

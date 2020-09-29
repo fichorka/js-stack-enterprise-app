@@ -1,14 +1,13 @@
-import { ObjectId } from 'mongodb'
 import { LoginsDb } from '../../data-access/logins-db'
 import { Login } from '../../entities/login'
 
 const makeFindLogin: MakeFindLogin = function ({ loginsDb }) {
-  const findLogin: FindLogin = async function (loginId) {
-    if (!loginId) {
-      throw new Error('No Id.')
+  const findLogin: FindLogin = async function (loginUserName) {
+    if (!loginUserName) {
+      throw new Error('No login username.')
     }
 
-    const requestedLogin = await loginsDb.findOne(loginId)
+    const requestedLogin = await loginsDb.findOne(loginUserName)
 
     if (!requestedLogin) {
       throw new Error('No login with such such Id.')
@@ -28,4 +27,4 @@ interface MakeProps {
   loginsDb: LoginsDb
 }
 
-export type FindLogin = (loginId: ObjectId) => Promise<Login>
+export type FindLogin = (loginUserName: string) => Promise<Login>
