@@ -7,4 +7,5 @@ export interface HttpRequest {
 export interface HttpResponse {
   body?: any
   statusCode: number
+  'Content-Type'?: string
 }

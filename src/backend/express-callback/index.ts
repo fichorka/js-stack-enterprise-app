@@ -9,7 +9,11 @@ const makeExpressCallback: MakeExpressCallback = function (controller) {
       pathParams: req.params
     }
     const httpResponse = await controller(httpRequest, req.session)
-    res.type('json')
+    if (httpResponse['Content-Type']) {
+      res.set('Content-Type', httpResponse['Content-Type'])
+    } else {
+      res.type('json')
+    }
     res.status(httpResponse.statusCode).send(httpResponse.body)
   }
 }
