@@ -4,7 +4,11 @@ import { HttpRequest, HttpResponse } from '../types'
 const makeGetEmployees: MakeGetEmployees = function ({ listEmployees }) {
   const getEmployees: GetEmployees = async function (httpRequest) {
     try {
-      const employeeList = await listEmployees(httpRequest.params)
+      const { employeeId } = httpRequest.pathParams
+
+      const queryParams = httpRequest.params
+
+      const employeeList = await listEmployees({ employeeId, ...queryParams })
 
       return {
         statusCode: 200,

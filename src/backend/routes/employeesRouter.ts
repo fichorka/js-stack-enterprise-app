@@ -4,7 +4,7 @@ import { makeExpressCallback } from '../express-callback'
 
 const router = Router()
 
-router.get('/', makeExpressCallback(getEmployees))
+router.get(['/:employeeId', '/'], makeExpressCallback(getEmployees))
 
 router.post('/', makeExpressCallback(postEmployee))
 

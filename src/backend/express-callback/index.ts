@@ -5,7 +5,8 @@ const makeExpressCallback: MakeExpressCallback = function (controller) {
   return async (req, res) => {
     const httpRequest = {
       body: req.body || {},
-      params: req.query || {}
+      params: req.query || {},
+      pathParams: req.params
     }
     const httpResponse = await controller(httpRequest, req.session)
     res.type('json')

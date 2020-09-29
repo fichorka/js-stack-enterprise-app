@@ -1,13 +1,19 @@
+import { ConvertToId } from '..'
 import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department, makeDepartment } from '../../entities'
 
-const makeEditDepartment: MakeEditDepartment = function ({ departmentsDb }) {
-  const editDepartment: EditDepartment = async function ({ departmentInfo }) {
-    if (!departmentInfo._id) {
+const makeEditDepartment: MakeEditDepartment = function ({
+  departmentsDb,
+  convertToId
+}) {
+  const editDepartment: EditDepartment = async function ({ _id, ...changes }) {
+    if (!_id) {
       throw new Error('No Id.')
     }
 
-    const existing = await departmentsDb.findOne(departmentInfo._id)
+    _id = convertToId(_id)
+
+    const existing = await departmentsDb.findOne(_id)
 
     if (!existing) {
       throw new Error('No Department with such Id.')
@@ -16,7 +22,7 @@ const makeEditDepartment: MakeEditDepartment = function ({ departmentsDb }) {
     const modifiedDepartment = await makeDepartment({
       departmentInfo: {
         ...existing,
-        ...departmentInfo,
+        ...changes,
         _id: existing._id
       }
     })
@@ -35,10 +41,7 @@ type MakeEditDepartment = ({ departmentsDb }: MakeProps) => EditDepartment
 
 interface MakeProps {
   departmentsDb: DepartmentsDb
+  convertToId: ConvertToId
 }
 
-export type EditDepartment = ({
-  departmentInfo
-}: {
-  departmentInfo: Department
-}) => Promise<Department>
+export type EditDepartment = (departmentInfo: Department) => Promise<Department>

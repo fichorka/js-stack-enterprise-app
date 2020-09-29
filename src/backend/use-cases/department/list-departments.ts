@@ -1,15 +1,20 @@
-import { ObjectId } from 'mongodb'
+import { ConvertToId } from '..'
 import { DepartmentsDb } from '../../data-access/departments-db'
 import { Department } from '../../entities'
 
-const makeListDepartment: MakeListDepartment = function ({ departmentsDb }) {
+const makeListDepartment: MakeListDepartment = function ({
+  departmentsDb,
+  convertToId
+}) {
   const listDepartment: ListDepartment = async function ({
     departmentId,
     limit = 10,
     skip = 0
   }) {
     if (departmentId) {
-      const requestedDepartment = await departmentsDb.findOne(departmentId)
+      const requestedDepartment = await departmentsDb.findOne(
+        convertToId(departmentId)
+      )
       if (!requestedDepartment) {
         throw new Error('No department with such such Id.')
       }
@@ -29,6 +34,7 @@ type MakeListDepartment = ({ departmentsDb }: MakeProps) => ListDepartment
 
 interface MakeProps {
   departmentsDb: DepartmentsDb
+  convertToId: ConvertToId
 }
 
 export type ListDepartment = (
@@ -36,7 +42,7 @@ export type ListDepartment = (
 ) => Promise<Department | Department[] | []>
 
 interface ListProps {
-  departmentId?: ObjectId
+  departmentId?: string
   limit?: number
   skip?: number
 }

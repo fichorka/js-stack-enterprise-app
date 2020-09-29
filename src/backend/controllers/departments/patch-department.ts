@@ -4,7 +4,12 @@ import { EditDepartment } from '../../use-cases/department'
 const makePatchDepartment: MakePatchDepartment = function ({ editDepartment }) {
   const patchDepartment: PatchDepartment = async function (httpRequest) {
     try {
-      const editedDepartment = await editDepartment(httpRequest.body)
+      const { departmentId } = httpRequest.pathParams
+
+      const editedDepartment = await editDepartment({
+        _id: departmentId,
+        ...httpRequest.body
+      })
 
       return {
         statusCode: 200,

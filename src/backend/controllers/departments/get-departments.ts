@@ -4,7 +4,14 @@ import { HttpRequest, HttpResponse } from '../types'
 const makeGetDepartments: MakeGetDepartments = function ({ listDepartments }) {
   const getDepartments: GetDepartments = async function (httpRequest) {
     try {
-      const departmentList = await listDepartments(httpRequest.params)
+      const { departmentId } = httpRequest.pathParams
+
+      const queryParams = httpRequest.params
+
+      const departmentList = await listDepartments({
+        departmentId,
+        ...queryParams
+      })
 
       return {
         statusCode: 200,

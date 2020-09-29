@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import { departmentsDb, employeesDb, loginsDb } from '../data-access'
 import {
   makeAddDepartment,
@@ -13,12 +14,14 @@ import {
 } from './employee'
 import { makeFindLogin } from './login'
 
-const listDepartments = makeListDepartment({ departmentsDb })
+const convertToId: ConvertToId = id => new ObjectId(id)
+
+const listDepartments = makeListDepartment({ departmentsDb, convertToId })
 const addDepartment = makeAddDepartment({ departmentsDb })
-const editDepartment = makeEditDepartment({ departmentsDb })
+const editDepartment = makeEditDepartment({ departmentsDb, convertToId })
 const removeDepartment = makeRemoveDepartment({ departmentsDb })
 
-const listEmployees = makeListEmployee({ employeesDb })
+const listEmployees = makeListEmployee({ employeesDb, convertToId })
 const addEmployee = makeAddEmployee({ employeesDb })
 const editEmployee = makeEditEmployee({ employeesDb })
 const removeEmployee = makeRemoveEmployee({ employeesDb })
@@ -36,3 +39,5 @@ export {
   removeEmployee,
   findLogin
 }
+
+export type ConvertToId = (id: string | ObjectId) => ObjectId

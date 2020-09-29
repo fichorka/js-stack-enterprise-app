@@ -1,15 +1,20 @@
-import { ObjectId } from 'mongodb'
+import { ConvertToId } from '..'
 import { EmployeesDb } from '../../data-access/employees-db'
 import { Employee } from '../../entities'
 
-const makeListEmployee: MakeListEmployee = function ({ employeesDb }) {
+const makeListEmployee: MakeListEmployee = function ({
+  employeesDb,
+  convertToId
+}) {
   const listEmployee: ListEmployee = async function ({
     employeeId,
     limit = 10,
     skip = 0
   }) {
     if (employeeId) {
-      const requestedEmployee = await employeesDb.findOne(employeeId)
+      const requestedEmployee = await employeesDb.findOne(
+        convertToId(employeeId)
+      )
       if (!requestedEmployee) {
         throw new Error('No employee with such such Id.')
       }
@@ -29,6 +34,7 @@ type MakeListEmployee = ({ employeesDb }: MakeProps) => ListEmployee
 
 interface MakeProps {
   employeesDb: EmployeesDb
+  convertToId: ConvertToId
 }
 
 export type ListEmployee = (
@@ -36,7 +42,7 @@ export type ListEmployee = (
 ) => Promise<Employee | Employee[]>
 
 interface ListProps {
-  employeeId?: ObjectId
+  employeeId?: string
   limit?: number
   skip?: number
 }
