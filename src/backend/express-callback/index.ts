@@ -4,8 +4,8 @@ import { HttpRequest, HttpResponse } from '../controllers/types'
 const makeExpressCallback: MakeExpressCallback = function (controller) {
   return async (req, res) => {
     const httpRequest = {
-      body: req.body,
-      params: req.query
+      body: req.body || {},
+      params: req.query || {}
     }
     const httpResponse = await controller(httpRequest, req.session)
     res.type('json')
