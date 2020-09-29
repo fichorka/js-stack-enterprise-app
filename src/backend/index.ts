@@ -17,6 +17,7 @@ import { loginRouter } from './routes/loginRouter'
   const app = express()
 
   // middleware
+  app.use(express.json())
   app.use(session(SESSSION_OPTIONS))
 
   //routes
