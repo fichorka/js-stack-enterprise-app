@@ -1,6 +1,6 @@
 # js-stack-enterprise-app
 
-\*An example app for managing business departments and employees **(work in progress)\***
+_An example app for managing business departments and employees_ **_(work in progress)_**
 
 ## Usage
 
