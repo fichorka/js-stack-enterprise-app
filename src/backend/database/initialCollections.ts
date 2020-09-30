@@ -48,47 +48,56 @@ const initialEmployees = [
   {
     employeeName: 'Fred Davies',
     salary: 50000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Bernard Katic',
     salary: 50000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Rich Davies',
     salary: 30000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Eva Dobos',
     salary: 30000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Mario Hunjadi',
     salary: 25000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Jean Michael',
     salary: 25000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Bill Gates',
     salary: 25000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Maja Janic',
     salary: 30000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   },
   {
     employeeName: 'Igor Horvat',
     salary: 35000,
-    departmentId: ''
+    departmentId: '',
+    lastModifyDate: new Date()
   }
 ]
 
