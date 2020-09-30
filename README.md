@@ -8,8 +8,9 @@
 
 **To start a backend server:**
 
-1. `npm run start-server`
-2. ... API is available at http://localhost:3000/
+1. Rename `.env.example.txt` file into `.env` and enter your mongodb values here, or contact me and I'll send you mine.
+2. `npm run start-server`
+3. ... API is available at http://localhost:3000/
 
 **To start a frontend app:**
 
