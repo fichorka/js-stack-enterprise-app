@@ -29,7 +29,9 @@ const toTable: toTable = list =>
   table(
     [
       Object.entries(list[0]).map(prop => prop[0]),
-      ...list.map((item: {}) => Object.entries(item).map(prop => prop[1]))
+      ...list.map((item: Record<string, unknown>) =>
+        Object.entries(item).map(prop => prop[1])
+      )
     ],
     {
       border: getBorderCharacters('ramac')
