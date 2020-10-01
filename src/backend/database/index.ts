@@ -62,7 +62,7 @@ const initializeDb: InitializeDb = async function () {
       }
       employeesToInsert[6] = {
         ...initialEmployees[6],
-        departmentId: ops[2]._id
+        departmentId: ops[0]._id
       }
       employeesToInsert[7] = {
         ...initialEmployees[7],
