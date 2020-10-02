@@ -1,0 +1,6 @@
+export * from './types'
+export * from './getDepartments'
+export * from './postDepartment'
+export * from './getEmployees'
+export * from './postEmployee'
+export * from './postLogin'
