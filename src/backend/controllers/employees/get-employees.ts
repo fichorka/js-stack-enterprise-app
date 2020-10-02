@@ -11,7 +11,10 @@ const makeGetEmployees: MakeGetEmployees = function ({
 
       const queryParams = httpRequest.params
 
-      const employeeList = await listEmployees({ employeeId, ...queryParams })
+      const employeeList = await listEmployees({
+        employeeId,
+        ...queryParams
+      })
 
       if (queryParams.format === 'text') {
         return {
@@ -25,7 +28,8 @@ const makeGetEmployees: MakeGetEmployees = function ({
         statusCode: 200,
         body: {
           meta: {
-            status: 'success'
+            status: 'success',
+            isSuccess: true
           },
           result: employeeList
         }
@@ -54,4 +58,6 @@ type MakeGetEmployees = (dependencies: {
   toTable: (list: any) => string
 }) => GetEmployees
 
-type GetEmployees = (httpRequest: HttpRequest) => Promise<HttpResponse>
+type GetEmployees = (
+  httpRequest: HttpRequest
+) => Promise<HttpResponse>

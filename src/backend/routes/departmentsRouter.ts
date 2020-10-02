@@ -5,12 +5,13 @@ import {
   postDepartment
 } from '../controllers'
 import { makeExpressCallback } from '../express-callback'
-import { authorize } from '../middleware'
+import jwt from 'express-jwt'
+import { TOKEN_SECRET } from '../config'
 
 const router = Router()
 
-// authorization middleware
-router.use(authorize)
+// jwt authorization
+router.use(jwt({ secret: TOKEN_SECRET, algorithms: ['HS256'] }))
 
 router.get(
   ['/:departmentId', '/'],

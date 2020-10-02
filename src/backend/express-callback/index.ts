@@ -10,7 +10,7 @@ const makeExpressCallback: MakeExpressCallback = function (
       params: req.query || {},
       pathParams: req.params
     }
-    const httpResponse = await controller(httpRequest, req.session)
+    const httpResponse = await controller(httpRequest)
     if (httpResponse['Content-Type']) {
       res.set('Content-Type', httpResponse['Content-Type'])
     } else {
@@ -23,7 +23,4 @@ const makeExpressCallback: MakeExpressCallback = function (
 export { makeExpressCallback }
 
 type MakeExpressCallback = (controller: Controller) => Handler
-type Controller = (
-  httpResponse: HttpRequest,
-  session?: any
-) => Promise<HttpResponse>
+type Controller = (httpResponse: HttpRequest) => Promise<HttpResponse>

@@ -1,9 +1,13 @@
 import { HttpRequest, HttpResponse } from '../types'
 import { FindLogin } from '../../use-cases/login'
+import { CreateToken } from '..'
 
-const makePostLogin: MakePostLogin = function ({ findLogin }) {
-  const postLogin: PostLogin = async function (httpRequest, session) {
-    // authenticates user on login by creating a session
+const makePostLogin: MakePostLogin = function ({
+  findLogin,
+  createToken
+}) {
+  const postLogin: PostLogin = async function (httpRequest) {
+    // authenticates user on login by creating a token
     try {
       const { username, password } = httpRequest.body
 
@@ -17,16 +21,17 @@ const makePostLogin: MakePostLogin = function ({ findLogin }) {
         throw new Error('Invalid password.')
       }
 
-      // if login info match, create a session
-      session.username = existingLogin.loginUserName
+      // if login info match, create token
+      const token = createToken(username)
 
       return {
         statusCode: 200,
         body: {
           meta: {
             status: 'success',
-            isSuccess: 1
-          }
+            isSuccess: true
+          },
+          token
         }
       }
     } catch (error) {
@@ -37,7 +42,7 @@ const makePostLogin: MakePostLogin = function ({ findLogin }) {
         body: {
           meta: {
             status: 'fail',
-            isSuccess: 0,
+            isFail: true,
             message: error.message
           }
         }
@@ -49,9 +54,10 @@ const makePostLogin: MakePostLogin = function ({ findLogin }) {
 
 export { makePostLogin }
 
-type MakePostLogin = (dependencies: { findLogin: FindLogin }) => PostLogin
+type MakePostLogin = (dependencies: {
+  findLogin: FindLogin
+  createToken: CreateToken
+  TOKEN_SECRET: string
+}) => PostLogin
 
-type PostLogin = (
-  httpRequest: HttpRequest,
-  session: any
-) => Promise<HttpResponse>
+type PostLogin = (httpRequest: HttpRequest) => Promise<HttpResponse>

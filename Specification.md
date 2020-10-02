@@ -37,7 +37,6 @@
 `http://localhost:3000`
 
 - POST `/login` Accepts user info for authentication in _json_ format
-- POST `/logout` Logs a user out, if logged in
 - GET `/employees:?format=?` returns a list of employees. Accepts format query prameter with values of _json_, or _txt_. Defaults to _json_.
 - POST `/employees` Adds a new employee to database. Accepts body payload in JSON format.
 - GET/POST `/departments` returns a list of departments / adds a new one

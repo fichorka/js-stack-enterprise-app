@@ -22,8 +22,9 @@ import {
   makePostEmployee
 } from './employees'
 import { makePostLogin } from './login'
-import { makePostLogout } from './logout'
 import { table, getBorderCharacters } from 'table'
+import jwt from 'jsonwebtoken'
+import { TOKEN_DURATION, TOKEN_SECRET } from '../config'
 
 const toTable: toTable = list =>
   table(
@@ -38,6 +39,12 @@ const toTable: toTable = list =>
     }
   )
 
+const createToken: CreateToken = username => {
+  return jwt.sign({ username }, TOKEN_SECRET, {
+    expiresIn: TOKEN_DURATION
+  })
+}
+
 const getDepartments = makeGetDepartments({ listDepartments })
 const postDepartment = makePostDepartment({ addDepartment })
 const patchDepartment = makePatchDepartment({ editDepartment })
@@ -48,9 +55,11 @@ const postEmployee = makePostEmployee({ addEmployee })
 const patchEmployee = makePatchEmployee({ editEmployee })
 const deleteEmployee = makeDeleteEmployee({ removeEmployee })
 
-const postLogin = makePostLogin({ findLogin })
-
-const postLogout = makePostLogout()
+const postLogin = makePostLogin({
+  findLogin,
+  createToken,
+  TOKEN_SECRET
+})
 
 export {
   getDepartments,
@@ -61,8 +70,9 @@ export {
   postEmployee,
   patchEmployee,
   deleteEmployee,
-  postLogin,
-  postLogout
+  postLogin
 }
 
 export type toTable = (list: any) => string
+
+export type CreateToken = (username: string) => string
