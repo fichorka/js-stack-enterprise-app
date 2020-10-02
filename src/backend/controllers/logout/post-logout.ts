@@ -1,14 +1,14 @@
 import { HttpRequest, HttpResponse } from '../types'
 
 const makePostLogout: MakePostLogout = function () {
-  const postLogout: PostLogout = async function (httpRequest, session) {
+  const postLogout: PostLogout = async function (
+    httpRequest,
+    session
+  ) {
     // logs a user out
-    try {
-      if (!session.username) {
-        throw new Error('Not logged in.')
-      }
 
-      // if logged in, delete session
+    try {
+      // delete session
       session.destroy()
 
       return {
