@@ -1,22 +1,21 @@
 import { API_URL } from '../config'
 import { LoginInfo } from './types'
 
-const login: Login = async loginInfo => {
+const postLogin: PostLogin = async loginInfo => {
   const urlEndpoint = API_URL + `/login`
-  return await !!fetch(urlEndpoint, {
+  return await fetch(urlEndpoint, {
     method: 'POST',
+    credentials: 'same-origin',
+    mode: 'cors',
     headers: {
-      'Conter-Type': 'json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(loginInfo)
   })
     .then(res => res.json())
-    .then(res => {
-      return res?.meta?.isSuccess
-    })
     .catch(() => false)
 }
 
-export { login }
+export { postLogin }
 
-type Login = (loginInfo: LoginInfo) => Promise<boolean>
+type PostLogin = (loginInfo: LoginInfo) => Promise<boolean>
