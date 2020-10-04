@@ -19,7 +19,6 @@ const getEmployees: GetEmployees = async ({
     }
   })
     .then(res => {
-      console.log('fetching')
       if (format === 'text') {
         return res.text()
       }

@@ -28,6 +28,13 @@ _An example app for managing business departments and employees. Features a data
 1. `npm start`
 2. App is running at http://localhost:8080/
 
+**Login credentials:**
+
+| Username | Password   |
+| -------- | ---------- |
+| Bill     | ItsNotSoft |
+| Jean     | trollsRule |
+
 ## Routes:
 
 **Backend (API)**:
