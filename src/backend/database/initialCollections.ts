@@ -16,7 +16,7 @@ const initialDepartments = [
   },
   {
     departmentName: 'Development',
-    departmentLocation: 'Zuric'
+    departmentLocation: 'Zurich'
   },
   {
     departmentName: 'Development',
@@ -24,7 +24,7 @@ const initialDepartments = [
   },
   {
     departmentName: 'Sales',
-    departmentLocation: 'Londond'
+    departmentLocation: 'London'
   },
   {
     departmentName: 'Sales',
