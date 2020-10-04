@@ -1,31 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Department,
   Employee,
   getDepartments,
-  getEmployees,
-  postEmployee
+  getEmployees
 } from './api'
-import { List } from './components/List'
-import { Login } from './components/login/Login'
-import jwt from 'jsonwebtoken'
-import { CreateUpdateForm } from './components/CreateUpdateForm/CreateUpdateForm'
-import { employeeTemplate } from './constants/employeeTemplate'
-import { Navbar } from './components/Navbar/Navbar'
+import { Login } from './components'
+import { Navbar } from './components'
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Switch
 } from 'react-router-dom'
 import './app.css'
-import { Employees } from './pages/employees'
-import { useData } from './custom-hooks/useData'
-import { Departments } from './pages/Departments'
+import { Employees } from './pages'
+import { useData } from './custom-hooks'
+import { Departments } from './pages'
 import './form.css'
+import { useToken } from './custom-hooks'
 
 export const App: React.FC = () => {
-  console.log('app')
   // root state
   const [token, setToken] = useState('')
   const [username, setUsername] = useState('')
@@ -36,9 +30,9 @@ export const App: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[] | []>([])
   const [isEmployeesStale, setIsEmployeesStale] = useState(true)
   const [employeeFormat, setEmployeeFormat] = useState('json')
-
   const [limit, setLimit] = useState(10)
 
+  // use Departments data
   useData({
     isDataStale: isDepartmentsStale,
     setIsDataStale: setIsDepartmentsStale,
@@ -49,6 +43,7 @@ export const App: React.FC = () => {
     format: 'json'
   })
 
+  // use Employees data
   useData({
     isDataStale: isEmployeesStale,
     setIsDataStale: setIsEmployeesStale,
@@ -59,18 +54,14 @@ export const App: React.FC = () => {
     format: employeeFormat
   })
 
-  // reafactor as "useUsername"
-  useEffect(() => {
-    if (token && !username) {
-      const decoded = jwt.decode(token) as Record<string, string>
-      if (decoded && decoded.username) setUsername(decoded.username)
-    }
-    if (!token) {
-      setUsername('')
-      setEmployees([])
-      setDepartments([])
-    }
-  }, [token])
+  // manage login state
+  useToken({
+    token,
+    setToken,
+    setUsername,
+    setDepartments,
+    setEmployees
+  })
 
   return (
     <Router>
@@ -101,6 +92,7 @@ export const App: React.FC = () => {
           <Route path="/">
             <Login
               title="Login"
+              token={token}
               username={username}
               setToken={setToken}
             />

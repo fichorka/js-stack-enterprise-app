@@ -6,13 +6,14 @@ import './login.css'
 const Login: React.FC<Props> = ({
   title,
   username,
-  setToken
+  setToken,
+  token
 }: Props) => {
   const [isError, setIsError] = useState(false)
 
   return (
     <PageLayout title={title}>
-      {username ? (
+      {token ? (
         <div className="log-status">
           <div>
             <span className="log-message">
@@ -74,6 +75,7 @@ export { Login }
 
 interface Props {
   title: string
+  token: string
   username: string
   setToken: CallableFunction
 }

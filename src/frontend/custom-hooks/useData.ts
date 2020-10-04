@@ -10,8 +10,8 @@ const useData: UseData = ({
   token,
   limit
 }: Props) => {
+  // custom hook that knows when to fetch data
   useEffect(() => {
-    // knows when to fetch data
     if (token && isDataStale) {
       fetchData({ token, limit, format }).then(data => {
         if (data) {
