@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { postLogin } from '../../api'
 import { PageLayout } from '../../layouts'
-import './login.css'
 
 const Login: React.FC<Props> = ({
   title,
@@ -14,7 +13,7 @@ const Login: React.FC<Props> = ({
   return (
     <PageLayout title={title}>
       {token ? (
-        <div className="log-status">
+        <div className="form-status">
           <div>
             <span className="log-message">
               Logged in as {username}
@@ -48,20 +47,24 @@ const Login: React.FC<Props> = ({
               })
           }}
         >
+          <label htmlFor="username" className="form__label">
+            Username
+          </label>
           <input
             className="form__input"
             type="text"
             id="username"
             name="username"
-            placeholder="Username"
             required
           />
+          <label htmlFor="password" className="form__label">
+            Password
+          </label>
           <input
             className="form__input"
             type="text"
             id="password"
             name="password"
-            placeholder="Password"
             required
           />
           <input type="submit" className="form__btn" />

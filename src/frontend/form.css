@@ -4,11 +4,21 @@
   width: 20rem;
 }
 
+.form-status {
+  margin: 0 auto;
+  width: 20rem;
+  text-align: center;
+}
+
+.form-message {
+  margin-right: 1rem;
+}
+
 .form__label {
   display: block;
-  margin: 1rem 0 0;
   font-size: 1rem;
-  line-height: 2.5rem;
+  line-height: 1.5em;
+  margin-bottom: 0.3rem;
 }
 
 .form__input {
@@ -18,7 +28,7 @@
   border: 0.15rem solid transparent;
   display: block;
   width: 100%;
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
   font-size: 1rem;
   box-sizing: border-box;
 }
@@ -35,6 +45,7 @@
   font-size: 1rem;
   display: inline-block;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .log-status {
