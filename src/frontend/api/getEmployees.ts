@@ -1,11 +1,17 @@
 import { API_URL } from '../config'
 import { Employee } from './types'
 
-const getEmployees: GetEmployee = async ({ id, format, token }) => {
+const getEmployees: GetEmployees = async ({
+  id,
+  format,
+  limit = 100,
+  token
+}) => {
   const urlEndpoint =
     API_URL +
     `/employees${id ? '/' + id : ''}` +
-    `${format === 'text' ? '?format=' + format : ''}`
+    `?limit=${limit}` +
+    `${format === 'text' ? '&format=' + format : ''}`
   return await fetch(urlEndpoint, {
     method: 'GET',
     headers: {
@@ -23,19 +29,20 @@ const getEmployees: GetEmployee = async ({ id, format, token }) => {
       if (format === 'text') {
         return res
       }
-      return res
+      return res.result
     })
     .catch(() => false)
 }
 
 export { getEmployees }
 
-type GetEmployee = (
+export type GetEmployees = (
   props: Props
 ) => Promise<Employee[] | Employee | null | undefined>
 
 interface Props {
-  id: string | undefined
+  id?: string
   format?: 'text'
+  limit?: number
   token: string
 }

@@ -13,9 +13,10 @@ const postLogin: PostLogin = async loginInfo => {
     body: JSON.stringify(loginInfo)
   })
     .then(res => res.json())
+    .then(res => res.token)
     .catch(() => false)
 }
 
 export { postLogin }
 
-type PostLogin = (loginInfo: LoginInfo) => Promise<boolean>
+type PostLogin = (loginInfo: LoginInfo) => Promise<string | false>

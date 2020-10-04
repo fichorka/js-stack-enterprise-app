@@ -1,4 +1,5 @@
 import React from 'react'
+import './pageLayout.css'
 
 const PageLayout: React.FC<Props> = ({ title, children }: Props) => {
   return (

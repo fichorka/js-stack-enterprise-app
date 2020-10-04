@@ -1,0 +1,104 @@
+import React, { useState } from 'react'
+import { useRouteMatch } from 'react-router-dom'
+import { Department, Employee } from '../../api'
+import { sortDepartments } from '../../sort-departments/sortDepartments'
+
+const EmployeeForm: React.FC<Props> = ({
+  employees,
+  token,
+  departments,
+  setIsDataStale,
+  apiFunction
+}: Props) => {
+  const { id } = useRouteMatch().params as Record<string, string>
+  const existingInfo:
+    | Employee
+    | Record<string, undefined> = employees.length
+    ? employees.filter(emp => emp._id === id)[0]
+    : {}
+
+  console.log(existingInfo)
+  const handleSubmit = evt => {
+    evt.preventDefault()
+    const info: Employee = {
+      ...existingInfo,
+      employeeName: evt.target.children.employeeName.value,
+      salary: Number(evt.target.children.salary.value),
+      departmentId: evt.target.children.departmentId.value
+    }
+
+    apiFunction({ info, token })
+      .then(res => {
+        if (res) {
+          setIsDataStale(true)
+        }
+      })
+      .catch(error => {
+        console.warn(error)
+      })
+  }
+
+  return (
+    <form
+      className={`form${!token ? ' error' : ''}`}
+      onSubmit={handleSubmit}
+    >
+      {((!id && !!departments.length) ||
+        (!!id &&
+          existingInfo.departmentId &&
+          departments.length)) && (
+        <>
+          <label htmlFor="employeeName" className="form__label">
+            Employee name
+          </label>
+          <input
+            type="text"
+            name="employeeName"
+            id="employeeName"
+            className="form__input"
+            defaultValue={existingInfo.employeeName}
+          />
+          <label htmlFor="salary" className="form__label">
+            Salary
+          </label>
+          <input
+            type="number"
+            name="salary"
+            id="salary"
+            className="form__input"
+            defaultValue={existingInfo.salary}
+          />
+          <label htmlFor="departmentId" className="form__label">
+            Department
+          </label>
+          {/* {!!departments.length && ( */}
+          <select
+            name="departmentId"
+            id="departmentId"
+            className="form__input"
+            defaultValue={existingInfo.departmentId}
+          >
+            <option value=""></option>
+            {sortDepartments(departments).map(dep => (
+              <option key={dep._id} value={dep._id}>
+                {dep.departmentName} in {dep.departmentLocation}
+              </option>
+            ))}
+          </select>
+
+          <input type="Submit" className="form__btn" />
+        </>
+      )}
+    </form>
+  )
+}
+
+export { EmployeeForm }
+
+interface Props {
+  employees?: Employee[]
+  token: string
+  departments: Department[]
+  setIsDataStale: CallableFunction
+  apiFunction: CallableFunction
+}

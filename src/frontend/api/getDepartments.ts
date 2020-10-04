@@ -4,12 +4,14 @@ import { Department } from './types'
 const getDepartments: GetDepartments = async ({
   id,
   format,
+  limit = 100,
   token
 }) => {
   const urlEndpoint =
     API_URL +
     `/departments${id ? '/' + id : ''}` +
-    `${format === 'text' ? '?format=' + format : ''}`
+    `?limit=${limit}` +
+    `${format === 'text' ? '&format=' + format : ''}`
 
   return await fetch(urlEndpoint, {
     method: 'GET',
@@ -27,7 +29,7 @@ const getDepartments: GetDepartments = async ({
       if (format === 'text') {
         return res
       }
-      return res
+      return res.result
     })
     .catch(error => {
       console.error(error)
@@ -37,12 +39,13 @@ const getDepartments: GetDepartments = async ({
 
 export { getDepartments }
 
-type GetDepartments = (
+export type GetDepartments = (
   props: Props
 ) => Promise<Department[] | Department | null | undefined>
 
 interface Props {
   id: string | undefined
   format?: 'text'
+  limit?: number
   token: string
 }

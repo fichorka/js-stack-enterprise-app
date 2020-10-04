@@ -12,12 +12,15 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/frontend/html-templates/index.html'
+      template: './src/frontend/html-templates/index.html',
+      publicPath: '/'
     })
   ],
   devServer: {
     contentBase: './dev_build',
-    open: true
+    open: true,
+    // contentBasePublicPath: '/',
+    historyApiFallback: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css']
@@ -33,6 +36,10 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       }
     ]
   }

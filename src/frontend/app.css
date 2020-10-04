@@ -1,0 +1,25 @@
+@media (min-aspect-ratio: 3/4) {
+  :root:root {
+    font-size: 2vh;
+  }
+}
+
+:root {
+  font-size: 4vw;
+  --text-col-1: #181818;
+  --text-col-2: #303030;
+  --text-col-3: #606060;
+  --bg-1: #f8f8f8;
+  --bg-2: #e0e0e0;
+  --bg-3: #d0d0d0;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, Helvetica, sans-serif;
+  background: var(--bg-2);
+}
+
+a {
+  text-decoration: none;
+}

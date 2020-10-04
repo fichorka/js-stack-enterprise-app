@@ -1,0 +1,9 @@
+.page {
+  margin: 0 1rem;
+}
+
+.page__title {
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 2rem 0 4rem;
+}

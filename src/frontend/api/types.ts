@@ -8,6 +8,7 @@ export interface Employee {
   _id?: string
   employeeName: string
   salary: number
+  departmentId: string
 }
 
 export interface LoginInfo {
