@@ -36,17 +36,30 @@
 
 `http://localhost:3000`
 
-- POST `/login` Accepts user info for authentication in _json_ format
-- GET `/employees:?format=?` returns a list of employees. Accepts format query prameter with values of _json_, or _txt_. Defaults to _json_.
-- POST `/employees` Adds a new employee to database. Accepts body payload in JSON format.
-- GET/POST `/departments` returns a list of departments / adds a new one
+- POST `/login` requires `{username, pasword}` in request body and in _json_ format.
+
+---
+
+- GET `/employees` returns a list of employees. Accepts the following query params: `:?format=json|text` or `?queryNo=1|2|3|4`.
+- POST `/employees` Creates a new employee. `{employeeName, salary, departmentId}` in _json_ format.
+- PATCH `/employees/employeeId` Updates a new employee. requires _json_ formatted body with modified properties.
+- DELETE `/employees/:employeeId` Deletes an employee.
+
+---
+
+- GET `/departments` returns a list of departments.
+- POST `/departments` requires `{departmentName, departmentLocation}`.
+- PATCH `/departments/departmentId` Updates a new employee. requires _json_ body with values for existing department.
+- DELETE `/departments/:departmentId` Deletes a Department.
 
 **Frontend**:
 
 `http://localhost:8000`
 
-- GET `/login` - UI form
-- GET `/employees` - UI list
-- GET `/employees/new` UI form
-- GET `/departments` - UI list
-- GET `/departments/new` UI form
+- `/` - Login UI form
+- `/employees` - UI list
+- `/employees/new` UI form
+- `/employees/employeeId` UI form
+- `/departments` - UI list
+- `/departments/new` UI form
+- `/departments/departmentId` UI form
