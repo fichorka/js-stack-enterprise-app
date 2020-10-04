@@ -49,8 +49,16 @@
   border-radius: 0.2rem;
 }
 
+.item:hover {
+  background: var(--bg-2);
+}
+
 .item.item:nth-child(2) {
   background: red;
+}
+
+.item.item--header {
+  background: rgba(256, 256, 256, 0.5);
 }
 
 .item__field {
@@ -63,4 +71,13 @@
   border-right: 0.2rem solid var(--bg-2);
   text-decoration: none;
   color: var(--text-col-1);
+}
+
+.item__btn {
+  font-weight: bold;
+}
+
+.item__btn:hover {
+  background: rgb(255, 210, 210);
+  color: darkred;
 }

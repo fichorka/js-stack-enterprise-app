@@ -15,7 +15,6 @@ const List: React.FC<Props> = ({
   token
 }: Props) => {
   const match = useRouteMatch()
-  console.log('list: ', match)
   return (
     <>
       {!!data.length && (
@@ -62,6 +61,19 @@ const List: React.FC<Props> = ({
 
           {typeof data !== 'string' && (
             <ol className="list">
+              <li className="item item--header">
+                {Object.entries(data[0])
+                  .filter(([key]) => key !== '_id')
+                  .map(([key = ''], i) => (
+                    <span
+                      key={key + i + 'header'}
+                      className="item__field"
+                    >
+                      {key}
+                    </span>
+                  ))}
+                <span className="item__field">Action</span>
+              </li>
               {data.map(item => (
                 <Link
                   key={item._id}
@@ -79,7 +91,7 @@ const List: React.FC<Props> = ({
                         </span>
                       ))}
                     <span
-                      className="item__field"
+                      className="item__field item__btn"
                       onClick={evt => {
                         evt.stopPropagation()
                         evt.preventDefault()
@@ -90,7 +102,7 @@ const List: React.FC<Props> = ({
                         )
                       }}
                     >
-                      <button className="item__btn">Delete</button>
+                      Delete
                     </span>
                   </li>
                 </Link>

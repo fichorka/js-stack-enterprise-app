@@ -3,7 +3,13 @@
 }
 
 .page__title {
+  color: var(--text-col-1);
   font-size: 2rem;
   font-weight: normal;
   margin: 2rem 0 4rem;
+  word-break: break-all;
+}
+
+.title__link.title__link {
+  color: blue;
 }
