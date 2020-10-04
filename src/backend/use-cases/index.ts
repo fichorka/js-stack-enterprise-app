@@ -16,15 +16,27 @@ import { makeFindLogin } from './login'
 
 const convertToId: ConvertToId = id => new ObjectId(id)
 
-const listDepartments = makeListDepartment({ departmentsDb, convertToId })
+const listDepartments = makeListDepartment({
+  departmentsDb,
+  convertToId
+})
 const addDepartment = makeAddDepartment({ departmentsDb })
-const editDepartment = makeEditDepartment({ departmentsDb, convertToId })
-const removeDepartment = makeRemoveDepartment({ departmentsDb })
+const editDepartment = makeEditDepartment({
+  departmentsDb,
+  convertToId
+})
+const removeDepartment = makeRemoveDepartment({
+  departmentsDb,
+  convertToId
+})
 
 const listEmployees = makeListEmployee({ employeesDb, convertToId })
 const addEmployee = makeAddEmployee({ employeesDb })
-const editEmployee = makeEditEmployee({ employeesDb })
-const removeEmployee = makeRemoveEmployee({ employeesDb })
+const editEmployee = makeEditEmployee({ employeesDb, convertToId })
+const removeEmployee = makeRemoveEmployee({
+  employeesDb,
+  convertToId
+})
 
 const findLogin = makeFindLogin({ loginsDb })
 

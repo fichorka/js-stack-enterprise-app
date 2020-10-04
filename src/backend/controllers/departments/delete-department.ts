@@ -4,18 +4,20 @@ import { RemoveDepartment } from '../../use-cases/department'
 const makeDeleteDepartment: MakeDeleteDepartment = function ({
   removeDepartment
 }) {
-  const deleteDepartment: DeleteDepartment = async function (httpRequest) {
+  const deleteDepartment: DeleteDepartment = async function (
+    httpRequest
+  ) {
     try {
-      const { id } = httpRequest?.params
+      const { departmentId } = httpRequest?.pathParams
 
-      if (!id) {
+      if (!departmentId) {
         throw new Error('No Id.')
       }
 
-      const removedDepartment = await removeDepartment(id)
+      const removedDepartment = await removeDepartment(departmentId)
 
       return {
-        statusCode: 204,
+        statusCode: 200,
         body: {
           meta: {
             status: 'success'
@@ -46,4 +48,6 @@ type MakeDeleteDepartment = (dependencies: {
   removeDepartment: RemoveDepartment
 }) => DeleteDepartment
 
-type DeleteDepartment = (httpRequest: HttpRequest) => Promise<HttpResponse>
+type DeleteDepartment = (
+  httpRequest: HttpRequest
+) => Promise<HttpResponse>

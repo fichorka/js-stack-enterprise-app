@@ -1,16 +1,20 @@
 import { HttpRequest, HttpResponse } from '../types'
 import { RemoveEmployee } from '../../use-cases/employee'
 
-const makeDeleteEmployee: MakeDeleteEmployee = function ({ removeEmployee }) {
-  const deleteEmployee: DeleteEmployee = async function (httpRequest) {
+const makeDeleteEmployee: MakeDeleteEmployee = function ({
+  removeEmployee
+}) {
+  const deleteEmployee: DeleteEmployee = async function (
+    httpRequest
+  ) {
     try {
-      const { id } = httpRequest?.params
+      const { employeeId } = httpRequest?.pathParams
 
-      if (!id) {
+      if (!employeeId) {
         throw new Error('No Id.')
       }
 
-      const removedEmployee = await removeEmployee(id)
+      const removedEmployee = await removeEmployee(employeeId)
 
       return {
         statusCode: 200,
@@ -44,4 +48,6 @@ type MakeDeleteEmployee = (dependencies: {
   removeEmployee: RemoveEmployee
 }) => DeleteEmployee
 
-type DeleteEmployee = (httpRequest: HttpRequest) => Promise<HttpResponse>
+type DeleteEmployee = (
+  httpRequest: HttpRequest
+) => Promise<HttpResponse>

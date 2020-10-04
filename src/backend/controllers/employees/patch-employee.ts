@@ -1,10 +1,19 @@
 import { HttpRequest, HttpResponse } from '../types'
 import { EditEmployee } from '../../use-cases/employee'
 
-const makePatchEmployee: MakePatchEmployee = function ({ editEmployee }) {
+const makePatchEmployee: MakePatchEmployee = function ({
+  editEmployee
+}) {
   const patchEmployee: PatchEmployee = async function (httpRequest) {
     try {
-      const editedEmployee = await editEmployee(httpRequest.body)
+      const { employeeId } = httpRequest.pathParams
+
+      console.log(employeeId)
+
+      const editedEmployee = await editEmployee({
+        _id: employeeId,
+        ...httpRequest.body
+      })
 
       return {
         statusCode: 200,
@@ -38,4 +47,6 @@ type MakePatchEmployee = (dependencies: {
   editEmployee: EditEmployee
 }) => PatchEmployee
 
-type PatchEmployee = (httpRequest: HttpRequest) => Promise<HttpResponse>
+type PatchEmployee = (
+  httpRequest: HttpRequest
+) => Promise<HttpResponse>

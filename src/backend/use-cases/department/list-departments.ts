@@ -22,7 +22,10 @@ const makeListDepartment: MakeListDepartment = function ({
       return requestedDepartment
     }
 
-    return await departmentsDb.findAll({ limit, skip })
+    return await departmentsDb.findAll({
+      limit: Number(limit),
+      skip: Number(skip)
+    })
   }
 
   return listDepartment
@@ -30,7 +33,9 @@ const makeListDepartment: MakeListDepartment = function ({
 
 export { makeListDepartment }
 
-type MakeListDepartment = ({ departmentsDb }: MakeProps) => ListDepartment
+type MakeListDepartment = ({
+  departmentsDb
+}: MakeProps) => ListDepartment
 
 interface MakeProps {
   departmentsDb: DepartmentsDb

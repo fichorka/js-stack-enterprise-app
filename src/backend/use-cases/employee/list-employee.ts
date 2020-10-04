@@ -22,7 +22,10 @@ const makeListEmployee: MakeListEmployee = function ({
       return requestedEmployee
     }
 
-    return await employeesDb.findAll({ limit, skip })
+    return await employeesDb.findAll({
+      limit: Number(limit),
+      skip: Number(skip)
+    })
   }
 
   return listEmployee

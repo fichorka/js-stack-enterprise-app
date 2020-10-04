@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import {
+  deleteEmployee,
   getEmployees,
   patchEmployee,
   postEmployee
@@ -17,6 +18,8 @@ router.get(['/:employeeId', '/'], makeExpressCallback(getEmployees))
 
 router.post('/', makeExpressCallback(postEmployee))
 
-router.patch('/', makeExpressCallback(patchEmployee))
+router.patch('/:employeeId', makeExpressCallback(patchEmployee))
+
+router.delete('/:employeeId', makeExpressCallback(deleteEmployee))
 
 export { router as employeesRouter }

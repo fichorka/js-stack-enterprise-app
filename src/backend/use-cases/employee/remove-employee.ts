@@ -1,16 +1,20 @@
 import { ObjectId } from 'mongodb'
+import { ConvertToId } from '..'
 import { EmployeesDb } from '../../data-access/employees-db'
 import { Employee } from '../../entities'
 
-const makeRemoveEmployee: MakeRemoveEmployee = function ({ employeesDb }) {
+const makeRemoveEmployee: MakeRemoveEmployee = function ({
+  employeesDb,
+  convertToId
+}) {
   const removeEmployee: RemoveEmployee = async function (employeeId) {
-    const exists = await employeesDb.findOne(employeeId)
+    const exists = await employeesDb.findOne(convertToId(employeeId))
 
     if (!exists) {
       throw new Error('No employee with such Id.')
     }
 
-    await employeesDb.deleteOne(employeeId)
+    await employeesDb.deleteOne(convertToId(employeeId))
 
     return exists
   }
@@ -20,10 +24,15 @@ const makeRemoveEmployee: MakeRemoveEmployee = function ({ employeesDb }) {
 
 export { makeRemoveEmployee }
 
-type MakeRemoveEmployee = ({ employeesDb }: MakeProps) => RemoveEmployee
+type MakeRemoveEmployee = ({
+  employeesDb
+}: MakeProps) => RemoveEmployee
 
 interface MakeProps {
   employeesDb: EmployeesDb
+  convertToId: ConvertToId
 }
 
-export type RemoveEmployee = (employeeId: ObjectId) => Promise<Employee>
+export type RemoveEmployee = (
+  employeeId: ObjectId
+) => Promise<Employee>

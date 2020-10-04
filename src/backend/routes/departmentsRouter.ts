@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import {
+  deleteDepartment,
   getDepartments,
   patchDepartment,
   postDepartment
@@ -21,5 +22,7 @@ router.get(
 router.post('/', makeExpressCallback(postDepartment))
 
 router.patch('/:departmentId', makeExpressCallback(patchDepartment))
+
+router.delete('/:departmentId', makeExpressCallback(deleteDepartment))
 
 export { router as departmentsRouter }
