@@ -4,7 +4,7 @@ import { Department, Employee } from '../api'
 const useData: UseData = ({
   isDataStale,
   setIsDataStale,
-  data,
+  format,
   setData,
   fetchData,
   token,
@@ -13,7 +13,7 @@ const useData: UseData = ({
   useEffect(() => {
     // knows when to fetch data
     if (token && isDataStale) {
-      fetchData({ token, limit }).then(data => {
+      fetchData({ token, limit, format }).then(data => {
         if (data) {
           setData(data)
           setIsDataStale(false)
@@ -30,7 +30,7 @@ type UseData = (options: Props) => void
 interface Props {
   isDataStale: boolean
   setIsDataStale: CallableFunction
-  data: Department[] | Employee[]
+  format: string
   setData: CallableFunction
   fetchData: CallableFunction
   token: string

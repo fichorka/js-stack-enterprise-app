@@ -28,7 +28,7 @@ export const App: React.FC = () => {
   console.log('app')
   // root state
   const [token, setToken] = useState(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpbGwiLCJpYXQiOjE2MDE4MzUwNzgsImV4cCI6MTYwMTgzODY3OH0.oAFVCCue6IhQ3noaae3be7CpdLIapGTosCBmJ52yNJ8'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpbGwiLCJpYXQiOjE2MDE4Mzg4MzMsImV4cCI6MTYwMTg0MjQzM30.nFmQoeJXkiPzZrr9FsvJ_d9n0-KhSN8RcN3U2Rc4y_w'
   )
   const [username, setUsername] = useState('')
   const [departments, setDepartments] = useState<Department[] | []>(
@@ -37,26 +37,28 @@ export const App: React.FC = () => {
   const [isDepartmentsStale, setIsDepartmentsStale] = useState(true)
   const [employees, setEmployees] = useState<Employee[] | []>([])
   const [isEmployeesStale, setIsEmployeesStale] = useState(true)
+  const [employeeFormat, setEmployeeFormat] = useState('json')
+
   const [limit, setLimit] = useState(10)
 
   useData({
     isDataStale: isDepartmentsStale,
     setIsDataStale: setIsDepartmentsStale,
-    data: departments,
     setData: setDepartments,
     fetchData: getDepartments,
     limit,
-    token
+    token,
+    format: 'json'
   })
 
   useData({
     isDataStale: isEmployeesStale,
     setIsDataStale: setIsEmployeesStale,
-    data: employees,
     setData: setEmployees,
     fetchData: getEmployees,
     limit,
-    token
+    token,
+    format: employeeFormat
   })
 
   // reafactor as "useUsername"
@@ -85,6 +87,8 @@ export const App: React.FC = () => {
               setIsDataStale={setIsEmployeesStale}
               setLimit={setLimit}
               token={token}
+              format={employeeFormat}
+              setFormat={setEmployeeFormat}
             />
           </Route>
           <Route path="/departments">

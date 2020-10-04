@@ -2,7 +2,6 @@ import { API_URL } from '../config'
 import { Employee } from './types'
 
 const patchEmployee: PatchEmployee = async ({ info, token }) => {
-  debugger
   const urlEndpoint = API_URL + `/employees/${info._id}`
   return await fetch(urlEndpoint, {
     method: 'PATCH',

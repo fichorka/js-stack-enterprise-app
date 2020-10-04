@@ -17,12 +17,18 @@ export const Employees: React.FC<Props> = ({
   setIsDataStale,
   setLimit,
   token,
-  departments
+  departments,
+  format,
+  setFormat
 }: Props) => {
   const [selection, setSelection] = useState({})
 
   const match = useRouteMatch()
-  console.log(match)
+
+  const resetFormat = () => {
+    setFormat('json')
+    setIsDataStale(true)
+  }
 
   return (
     <PageLayout title="Employees">
@@ -32,6 +38,7 @@ export const Employees: React.FC<Props> = ({
             setIsDataStale={setIsDataStale}
             token={token}
             apiFunction={postEmployee}
+            setFormat={setFormat}
             departments={departments}
           />
         </Route>
@@ -42,24 +49,31 @@ export const Employees: React.FC<Props> = ({
             token={token}
             apiFunction={patchEmployee}
             departments={departments}
+            setFormat={setFormat}
           />
         </Route>
         <Route path={match.path}>
           <List
-            data={employees.map(emp => {
-              return {
-                _id: emp._id,
-                employeeName: emp.employeeName,
-                salary: emp.salary,
-                departmentId: emp.departmentId
-              }
-            })}
+            data={
+              Array.isArray(employees)
+                ? employees.map(emp => {
+                    return {
+                      _id: emp._id,
+                      employeeName: emp.employeeName,
+                      salary: emp.salary,
+                      departmentId: emp.departmentId
+                    }
+                  })
+                : employees
+            }
             setIsDataStale={setIsDataStale}
             limit={limit}
             setLimit={setLimit}
             setSelection={setSelection}
             deleteFunc={deleteEmployee}
             token={token}
+            format={format}
+            setFormat={setFormat}
           />
         </Route>
       </Switch>
@@ -74,4 +88,6 @@ interface Props {
   setLimit: CallableFunction
   token: string
   departments: Department[]
+  format?: string
+  setFormat?: CallableFunction
 }

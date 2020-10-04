@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import { Department, Employee } from '../../api'
 import { sortDepartments } from '../../sort-departments/sortDepartments'
@@ -8,16 +8,21 @@ const EmployeeForm: React.FC<Props> = ({
   token,
   departments,
   setIsDataStale,
+  setFormat,
   apiFunction
 }: Props) => {
+  useEffect(() => {
+    if (typeof employees === 'string') {
+      setFormat('json')
+      setIsDataStale(true)
+    }
+  }, [employees])
   const { id } = useRouteMatch().params as Record<string, string>
-  const existingInfo:
-    | Employee
-    | Record<string, undefined> = employees.length
-    ? employees.filter(emp => emp._id === id)[0]
-    : {}
+  const existingInfo: Employee | Record<string, undefined> =
+    id && typeof employees !== 'string' && employees.length
+      ? employees.filter(emp => emp._id === id)[0]
+      : {}
 
-  console.log(existingInfo)
   const handleSubmit = evt => {
     evt.preventDefault()
     const info: Employee = {
@@ -101,4 +106,5 @@ interface Props {
   departments: Department[]
   setIsDataStale: CallableFunction
   apiFunction: CallableFunction
+  setFormat: CallableFunction
 }

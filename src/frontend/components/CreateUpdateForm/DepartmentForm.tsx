@@ -10,11 +10,10 @@ const DepartmentForm: React.FC<Props> = ({
 }: Props) => {
   const { id } = useRouteMatch().params as Record<string, string>
 
-  const existingInfo:
-    | Department
-    | Record<string, undefined> = departments.length
-    ? departments.filter(dep => dep._id === id)[0]
-    : {}
+  const existingInfo: Department | Record<string, undefined> =
+    id && departments.length
+      ? departments.filter(dep => dep._id === id)[0]
+      : {}
 
   const handleSubmit = evt => {
     evt.preventDefault()

@@ -3,7 +3,6 @@ import { Department } from './types'
 
 const patchDepartment: PatchDepartment = async ({ info, token }) => {
   const urlEndpoint = API_URL + `/departments/${info._id}`
-  debugger
   return await fetch(urlEndpoint, {
     method: 'PATCH',
     headers: {
