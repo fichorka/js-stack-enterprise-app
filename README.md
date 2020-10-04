@@ -19,7 +19,7 @@ _An example app for managing business departments and employees. Features a data
 
 **To start a backend server:**
 
-1. Rename `.env.example.txt` file into `.env` and enter your mongodb credentials here, or contact me and I'll send you mine.
+1. Rename `.env.example.txt` file into `.env` and enter your mongodb credentials here, or contact me at filip.biterski@gmail.com and I'll send you mine.
 2. `npm run start-server`
 3. ... API is available at http://localhost:3000/
 
