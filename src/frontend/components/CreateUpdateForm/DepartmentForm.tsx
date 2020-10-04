@@ -40,6 +40,9 @@ const DepartmentForm: React.FC<Props> = ({
     >
       {(!id || (!!id && !!existingInfo.departmentName)) && (
         <>
+          <label htmlFor="departmentName" className="form__label">
+            Department name
+          </label>
           <input
             type="text"
             name="departmentName"
@@ -47,6 +50,9 @@ const DepartmentForm: React.FC<Props> = ({
             className="form__input"
             defaultValue={existingInfo.departmentName}
           />
+          <label htmlFor="departmentLocation" className="form__label">
+            Department location
+          </label>
           <input
             type="text"
             name="departmentLocation"

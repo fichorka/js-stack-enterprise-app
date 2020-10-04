@@ -21,7 +21,7 @@ export const Departments: React.FC<Props> = ({
 
   const { path } = useRouteMatch()
   return (
-    <PageLayout title="Employees">
+    <PageLayout title="Departments">
       <Switch>
         <Route path={`${path}/new`}>
           <DepartmentForm
