@@ -7,13 +7,11 @@ const makeGetEmployees: MakeGetEmployees = function ({
 }) {
   const getEmployees: GetEmployees = async function (httpRequest) {
     try {
-      const { queryNo } = httpRequest.params
       const { employeeId } = httpRequest.pathParams
 
       const queryParams = httpRequest.params
 
       const employeeList = await listEmployees({
-        queryNo: queryNo,
         employeeId,
         ...queryParams
       })

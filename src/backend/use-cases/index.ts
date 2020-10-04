@@ -1,5 +1,10 @@
 import { ObjectId } from 'mongodb'
-import { departmentsDb, employeesDb, loginsDb } from '../data-access'
+import {
+  departmentsDb,
+  employeesDb,
+  linqQueries,
+  loginsDb
+} from '../data-access'
 import {
   makeAddDepartment,
   makeEditDepartment,
@@ -30,7 +35,11 @@ const removeDepartment = makeRemoveDepartment({
   convertToId
 })
 
-const listEmployees = makeListEmployee({ employeesDb, convertToId })
+const listEmployees = makeListEmployee({
+  employeesDb,
+  convertToId,
+  linqQueries
+})
 const addEmployee = makeAddEmployee({ employeesDb })
 const editEmployee = makeEditEmployee({ employeesDb, convertToId })
 const removeEmployee = makeRemoveEmployee({

@@ -3,7 +3,7 @@ import mongodb, { Db } from 'mongodb'
 import { MONGO_URI, DB_NAME } from '../config'
 import { makeDepartmentsDb } from './departments-db'
 import { makeEmployeesDb } from './employees-db'
-import { makeLinqQueries } from './LinqQueries'
+import { makeLinqQueries } from './linqQueries'
 import { makeLoginsDb } from './logins-db'
 
 const client = new mongodb.MongoClient(MONGO_URI)

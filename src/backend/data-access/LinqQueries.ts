@@ -7,8 +7,8 @@ const makeLinqQueries: MakeLinqQueries = ({
   departmentsDb,
   employeesDb
 }) => {
-  const LinqQuery: LinqQuery = () => {
-    const query1 = async () => {
+  return {
+    query1: async () => {
       const employees = await employeesDb.findAll({
         limit: 100,
         skip: 0
@@ -34,9 +34,9 @@ const makeLinqQueries: MakeLinqQueries = ({
         .average()
 
       return avgSalary
-    }
+    },
 
-    const query2 = async () => {
+    query2: async () => {
       const employees = await employeesDb.findAll({
         limit: 100,
         skip: 0
@@ -64,9 +64,9 @@ const makeLinqQueries: MakeLinqQueries = ({
         .toArray()
 
       return res
-    }
+    },
 
-    const query3 = async () => {
+    query3: async () => {
       const employees = await employeesDb.findAll({
         limit: 100,
         skip: 0
@@ -102,9 +102,9 @@ const makeLinqQueries: MakeLinqQueries = ({
         .toArray()
 
       return result
-    }
+    },
 
-    const query4 = async () => {
+    query4: async () => {
       const employees = await employeesDb.findAll({
         limit: 1000,
         skip: 0
@@ -116,17 +116,19 @@ const makeLinqQueries: MakeLinqQueries = ({
 
       return result
     }
-
-    return { query1, query2, query3, query4 }
-  }
-  return LinqQuery
+  } as LinqQuery
 }
 
 export { makeLinqQueries }
 
 export type MakeLinqQueries = (deps: Props) => LinqQuery
 
-type LinqQuery = () => Record<string, CallableFunction>
+export interface LinqQuery {
+  query1: CallableFunction
+  query2: CallableFunction
+  query3: CallableFunction
+  query4: CallableFunction
+}
 
 interface Props {
   linqJs: (arr: Record<string, any>[]) => IEnumerable<any>
