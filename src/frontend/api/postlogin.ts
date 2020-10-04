@@ -13,6 +13,7 @@ const postLogin: PostLogin = async loginInfo => {
     body: JSON.stringify(loginInfo)
   })
     .then(res => res.json())
+    .then(res => res.token)
     .catch(() => false)
 }
 

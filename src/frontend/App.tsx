@@ -27,9 +27,7 @@ import './form.css'
 export const App: React.FC = () => {
   console.log('app')
   // root state
-  const [token, setToken] = useState(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpbGwiLCJpYXQiOjE2MDE4Mzg4MzMsImV4cCI6MTYwMTg0MjQzM30.nFmQoeJXkiPzZrr9FsvJ_d9n0-KhSN8RcN3U2Rc4y_w'
-  )
+  const [token, setToken] = useState('')
   const [username, setUsername] = useState('')
   const [departments, setDepartments] = useState<Department[] | []>(
     []

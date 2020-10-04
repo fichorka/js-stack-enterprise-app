@@ -9,7 +9,6 @@ const Login: React.FC<Props> = ({
   setToken
 }: Props) => {
   const [isError, setIsError] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <PageLayout title={title}>
@@ -34,7 +33,6 @@ const Login: React.FC<Props> = ({
           className={`form${isError ? ' error' : ''}`}
           onSubmit={evt => {
             evt.preventDefault()
-            setIsLoading(true)
             const username = evt.target.children.username.value
             const password = evt.target.children.password.value
             postLogin({ username, password })
@@ -42,12 +40,10 @@ const Login: React.FC<Props> = ({
                 if (res) {
                   setToken(res)
                   setIsError(false)
-                  setIsLoading(false)
                 } else throw new Error()
               })
               .catch(() => {
                 setIsError(true)
-                setIsLoading(false)
               })
           }}
         >
