@@ -6,17 +6,18 @@ const postDepartment: PostDepartments = async ({ info, token }) => {
   return await fetch(urlEndpoint, {
     method: 'POST',
     headers: {
-      'Content-Type': 'json',
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(info)
   })
-    .then(res => res.json())
-    .then(res => res?.meta?.isSuccess)
-    .catch(error => {
-      console.error(error)
-      return
+    .then(res => {
+      if (res.status > 300) {
+        throw new Error()
+      }
+      return res
     })
+    .then(res => res.json())
 }
 
 export { postDepartment }

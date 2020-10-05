@@ -37,10 +37,8 @@ const Login: React.FC<Props> = ({
             const password = evt.target.children.password.value
             postLogin({ username, password })
               .then(res => {
-                if (res) {
-                  setToken(res)
-                  setIsError(false)
-                } else throw new Error()
+                setIsError(false)
+                setToken(res)
               })
               .catch(() => {
                 setIsError(true)

@@ -11,12 +11,13 @@ const patchDepartment: PatchDepartment = async ({ info, token }) => {
     },
     body: JSON.stringify(info)
   })
-    .then(res => res.json())
-    .then(res => !!res)
-    .catch(error => {
-      console.error(error)
-      return
+    .then(res => {
+      if (res.status > 300) {
+        throw new Error()
+      }
+      return res
     })
+    .then(res => res.json())
 }
 
 export { patchDepartment }

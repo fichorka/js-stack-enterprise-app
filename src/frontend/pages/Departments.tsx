@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import {
   deleteDepartment,
@@ -17,9 +17,8 @@ export const Departments: React.FC<Props> = ({
   setLimit,
   token
 }: Props) => {
-  const [selection, setSelection] = useState({})
-
   const { path } = useRouteMatch()
+
   return (
     <PageLayout title="Departments">
       <Switch>
@@ -34,7 +33,6 @@ export const Departments: React.FC<Props> = ({
         <Route path={`${path}/:id`}>
           <DepartmentForm
             departments={departments}
-            existingInfo={selection}
             setIsDataStale={setIsDataStale}
             token={token}
             apiFunction={patchDepartment}
@@ -52,7 +50,6 @@ export const Departments: React.FC<Props> = ({
             limit={limit}
             setLimit={setLimit}
             setIsDataStale={setIsDataStale}
-            setSelection={setSelection}
             deleteFunc={deleteDepartment}
             token={token}
           />

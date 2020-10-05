@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import {
   Department,
@@ -21,14 +21,7 @@ export const Employees: React.FC<Props> = ({
   format,
   setFormat
 }: Props) => {
-  const [selection, setSelection] = useState({})
-
   const match = useRouteMatch()
-
-  const resetFormat = () => {
-    setFormat('json')
-    setIsDataStale(true)
-  }
 
   return (
     <PageLayout title="Employees">
@@ -69,7 +62,6 @@ export const Employees: React.FC<Props> = ({
             setIsDataStale={setIsDataStale}
             limit={limit}
             setLimit={setLimit}
-            setSelection={setSelection}
             deleteFunc={deleteEmployee}
             token={token}
             format={format}

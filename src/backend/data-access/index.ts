@@ -6,7 +6,9 @@ import { makeEmployeesDb } from './employees-db'
 import { makeLinqQueries } from './linqQueries'
 import { makeLoginsDb } from './logins-db'
 
-const client = new mongodb.MongoClient(MONGO_URI)
+const client = new mongodb.MongoClient(MONGO_URI, {
+  useUnifiedTopology: true
+})
 
 const makeDb: MakeDb = async function () {
   if (!client.isConnected()) {

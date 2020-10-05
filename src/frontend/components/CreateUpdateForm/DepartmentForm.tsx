@@ -1,5 +1,5 @@
-import React from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Department } from '../../api'
 
 const DepartmentForm: React.FC<Props> = ({
@@ -8,6 +8,9 @@ const DepartmentForm: React.FC<Props> = ({
   setIsDataStale,
   apiFunction
 }: Props) => {
+  const [isError, setIsError] = useState(false)
+  const history = useHistory()
+
   const { id } = useRouteMatch().params as Record<string, string>
 
   const existingInfo: Department | Record<string, undefined> =
@@ -24,18 +27,19 @@ const DepartmentForm: React.FC<Props> = ({
     }
     apiFunction({ info, token })
       .then(res => {
-        if (res) {
-          setIsDataStale(true)
-        }
+        setIsError(false)
+        setIsDataStale(true)
+        history.push('/departments')
       })
       .catch(error => {
+        setIsError(true)
         console.warn(error)
       })
   }
 
   return (
     <form
-      className={`form${!token ? ' error' : ''}`}
+      className={`form${isError ? ' error' : ''}`}
       onSubmit={handleSubmit}
     >
       {(!id || (!!id && !!existingInfo.departmentName)) && (
@@ -71,7 +75,6 @@ export { DepartmentForm }
 
 interface Props {
   departments: Department[] | []
-  existingInfo?: Department | Record<string, string>
   token: string
   setIsDataStale: CallableFunction
   apiFunction: CallableFunction

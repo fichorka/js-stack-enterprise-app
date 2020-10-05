@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Department, Employee } from '../../api'
 import { sortDepartments } from '../../sort-departments/sortDepartments'
 
@@ -17,6 +17,10 @@ const EmployeeForm: React.FC<Props> = ({
       setIsDataStale(true)
     }
   }, [employees])
+
+  const [isError, setIsError] = useState(false)
+  const history = useHistory()
+
   const { id } = useRouteMatch().params as Record<string, string>
   const existingInfo: Employee | Record<string, undefined> =
     id && typeof employees !== 'string' && employees.length
@@ -34,18 +38,19 @@ const EmployeeForm: React.FC<Props> = ({
 
     apiFunction({ info, token })
       .then(res => {
-        if (res) {
-          setIsDataStale(true)
-        }
+        setIsError(false)
+        setIsDataStale(true)
+        history.push('/employees')
       })
       .catch(error => {
+        setIsError(true)
         console.warn(error)
       })
   }
 
   return (
     <form
-      className={`form${!token ? ' error' : ''}`}
+      className={`form${isError ? ' error' : ''}`}
       onSubmit={handleSubmit}
     >
       {((!id && !!departments.length) ||

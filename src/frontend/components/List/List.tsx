@@ -8,7 +8,6 @@ const List: React.FC<Props> = ({
   limit,
   setLimit,
   setIsDataStale,
-  setSelection,
   deleteFunc,
   format,
   setFormat,
@@ -75,13 +74,7 @@ const List: React.FC<Props> = ({
                 <span className="item__field">Action</span>
               </li>
               {data.map(item => (
-                <Link
-                  key={item._id}
-                  to={`${match.url}/${item._id}`}
-                  onClick={() => {
-                    setSelection(item)
-                  }}
-                >
+                <Link key={item._id} to={`${match.url}/${item._id}`}>
                   <li className="item">
                     {Object.entries(item)
                       .filter(([key]) => key !== '_id')
@@ -126,7 +119,6 @@ interface Props {
   limit: number
   setIsDataStale: CallableFunction
   setLimit: CallableFunction
-  setSelection: CallableFunction
   deleteFunc: CallableFunction
   token: string
   format?: string
