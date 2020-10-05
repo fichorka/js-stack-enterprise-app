@@ -12,8 +12,14 @@ const postLogin: PostLogin = async loginInfo => {
     },
     body: JSON.stringify(loginInfo)
   })
+    .then(res => {
+      if (res.status > 300) {
+        throw new Error()
+      }
+      return res
+    })
     .then(res => res.json())
-    .catch(() => false)
+    .then(res => res.token)
 }
 
 export { postLogin }
