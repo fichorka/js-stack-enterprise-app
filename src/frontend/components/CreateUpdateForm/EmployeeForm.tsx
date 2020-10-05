@@ -66,6 +66,7 @@ const EmployeeForm: React.FC<Props> = ({
             name="employeeName"
             id="employeeName"
             className="form__input"
+            required
             defaultValue={existingInfo.employeeName}
           />
           <label htmlFor="salary" className="form__label">
@@ -76,6 +77,7 @@ const EmployeeForm: React.FC<Props> = ({
             name="salary"
             id="salary"
             className="form__input"
+            required
             defaultValue={existingInfo.salary}
           />
           <label htmlFor="departmentId" className="form__label">
@@ -86,6 +88,7 @@ const EmployeeForm: React.FC<Props> = ({
             name="departmentId"
             id="departmentId"
             className="form__input"
+            required
             defaultValue={existingInfo.departmentId}
           >
             <option value=""></option>

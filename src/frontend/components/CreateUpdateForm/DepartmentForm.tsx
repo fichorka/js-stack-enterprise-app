@@ -52,6 +52,7 @@ const DepartmentForm: React.FC<Props> = ({
             name="departmentName"
             id="departmentName"
             className="form__input"
+            required
             defaultValue={existingInfo.departmentName}
           />
           <label htmlFor="departmentLocation" className="form__label">
@@ -62,6 +63,7 @@ const DepartmentForm: React.FC<Props> = ({
             name="departmentLocation"
             id="departmentLocation"
             className="form__input"
+            required
             defaultValue={existingInfo.departmentLocation}
           />
           <input type="Submit" className="form__btn" />
