@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Department, Employee } from '../../api'
-import { sortDepartments } from '../../sort-departments/sortDepartments'
+import { sortDepartments } from '../../utils'
 
 const EmployeeForm: React.FC<Props> = ({
   employees,
